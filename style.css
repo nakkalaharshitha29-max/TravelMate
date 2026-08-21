@@ -1,0 +1,1646 @@
+/* =========================================
+   GLOBAL STYLES
+========================================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    color: #1e293b;
+    background-color: #ffffff;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+button,
+input,
+textarea {
+    font: inherit;
+}
+
+button {
+    cursor: pointer;
+}
+
+img {
+    max-width: 100%;
+    display: block;
+}
+
+
+/* =========================================
+   REUSABLE SECTION STYLES
+========================================= */
+
+.section {
+    padding: 70px 20px;
+}
+
+.section-heading {
+    text-align: center;
+    max-width: 700px;
+    margin: 0 auto 45px;
+}
+
+.section-label {
+    color: #0ea5e9;
+    font-size: 0.85rem;
+    font-weight: bold;
+    letter-spacing: 2px;
+    margin-bottom: 8px;
+}
+
+.section-heading h2 {
+    font-size: 2rem;
+    margin-bottom: 12px;
+}
+
+.section-heading p {
+    color: #64748b;
+}
+
+
+/* =========================================
+   HEADER / NAVBAR
+========================================= */
+
+.header {
+    background-color: #ffffff;
+
+    position: sticky;
+    top: 0;
+
+    z-index: 1000;
+
+    box-shadow:
+        0 2px 10px rgba(0, 0, 0, 0.08);
+}
+
+.navbar {
+    width: 100%;
+    max-width: 1200px;
+
+    margin: auto;
+
+    padding: 15px 20px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+}
+
+
+/* Logo */
+
+.logo {
+    font-size: 1.6rem;
+
+    font-weight: bold;
+
+    color: #0f172a;
+}
+
+.logo span {
+    color: #0ea5e9;
+}
+
+
+/* Mobile Menu Button */
+
+.menu-btn {
+    background: none;
+
+    border: none;
+
+    font-size: 1.8rem;
+
+    color: #0f172a;
+}
+
+
+/* Navigation */
+
+.nav-links {
+    list-style: none;
+
+    position: absolute;
+
+    top: 70px;
+
+    left: 0;
+
+    width: 100%;
+
+    background-color: white;
+
+    display: none;
+
+    flex-direction: column;
+
+    text-align: center;
+
+    padding: 20px 0;
+
+    box-shadow:
+        0 5px 10px rgba(0, 0, 0, 0.08);
+}
+
+.nav-links.active {
+    display: flex;
+}
+
+.nav-links li {
+    margin: 10px 0;
+}
+
+.nav-links a {
+    font-weight: 600;
+
+    transition: 0.3s;
+}
+
+.nav-links a:hover {
+    color: #0ea5e9;
+}
+
+
+/* =========================================
+   HERO SECTION
+========================================= */
+
+.hero {
+    min-height: 90vh;
+
+    display: flex;
+
+    align-items: center;
+
+    padding: 80px 20px;
+
+    background:
+        linear-gradient(
+            rgba(15, 23, 42, 0.65),
+            rgba(15, 23, 42, 0.65)
+        ),
+        linear-gradient(
+            135deg,
+            #38bdf8,
+            #0f172a
+        );
+
+    color: white;
+}
+
+.hero-content {
+    max-width: 850px;
+
+    margin: auto;
+
+    text-align: center;
+}
+
+.hero-small-text {
+    color: #bae6fd;
+
+    font-size: 0.8rem;
+
+    font-weight: bold;
+
+    letter-spacing: 3px;
+
+    margin-bottom: 15px;
+}
+
+.hero h1 {
+    font-size: 2.5rem;
+
+    line-height: 1.15;
+
+    margin-bottom: 20px;
+}
+
+.hero h1 span {
+    color: #7dd3fc;
+}
+
+.hero-description {
+    max-width: 650px;
+
+    margin: 0 auto 30px;
+
+    color: #e2e8f0;
+
+    font-size: 1rem;
+}
+
+.hero-buttons {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 12px;
+
+    align-items: center;
+}
+
+
+/* =========================================
+   BUTTONS
+========================================= */
+
+.btn {
+    display: inline-block;
+
+    padding: 12px 22px;
+
+    border-radius: 8px;
+
+    font-weight: bold;
+
+    border: 2px solid transparent;
+
+    transition: 0.3s;
+}
+
+.primary-btn {
+    background-color: #0ea5e9;
+
+    color: white;
+}
+
+.primary-btn:hover {
+    background-color: #0284c7;
+
+    transform: translateY(-2px);
+}
+
+.secondary-btn {
+    border-color: white;
+
+    color: white;
+}
+
+.secondary-btn:hover {
+    background-color: white;
+
+    color: #0f172a;
+}
+
+
+/* =========================================
+   DESTINATIONS SECTION
+========================================= */
+
+.destination-container {
+    max-width: 1200px;
+
+    margin: auto;
+
+    display: grid;
+
+    grid-template-columns: 1fr;
+
+    gap: 25px;
+}
+
+
+/* Destination Card */
+
+.destination-card {
+    background-color: white;
+
+    border-radius: 14px;
+
+    overflow: hidden;
+
+    box-shadow:
+        0 5px 20px rgba(0, 0, 0, 0.08);
+
+    transition: 0.3s;
+}
+
+.destination-card:hover {
+    transform: translateY(-6px);
+
+    box-shadow:
+        0 10px 30px rgba(0, 0, 0, 0.12);
+}
+
+
+/* =========================================
+   DESTINATION IMAGES
+========================================= */
+
+.destination-image {
+    height: 220px;
+
+    position: relative;
+
+    overflow: hidden;
+
+    color: white;
+}
+
+
+/* Actual image */
+
+.destination-image img {
+    width: 100%;
+
+    height: 100%;
+
+    object-fit: cover;
+
+    display: block;
+
+    transition: transform 0.4s ease;
+}
+
+
+/* Zoom image when hovering card */
+
+.destination-card:hover .destination-image img {
+    transform: scale(1.05);
+}
+
+
+/* Country label */
+
+.destination-image span {
+    position: absolute;
+
+    top: 15px;
+
+    right: 15px;
+
+    background-color:
+        rgba(15, 23, 42, 0.75);
+
+    padding: 5px 10px;
+
+    border-radius: 20px;
+
+    font-size: 0.8rem;
+
+    z-index: 2;
+}
+
+
+/* =========================================
+   CARD CONTENT
+========================================= */
+
+.card-content {
+    padding: 20px;
+}
+
+.card-content h3 {
+    font-size: 1.3rem;
+
+    margin-bottom: 8px;
+}
+
+.card-content p {
+    color: #64748b;
+
+    font-size: 0.95rem;
+
+    margin-bottom: 20px;
+}
+
+.card-bottom {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+}
+
+.card-bottom strong {
+    color: #0ea5e9;
+
+    font-size: 1.1rem;
+}
+
+
+/* =========================================
+   FAVOURITE BUTTON
+========================================= */
+
+.favorite-btn {
+    width: 40px;
+
+    height: 40px;
+
+    border: none;
+
+    border-radius: 50%;
+
+    background-color: #f1f5f9;
+
+    font-size: 1.4rem;
+
+    transition: 0.3s;
+}
+
+.favorite-btn:hover {
+    background-color: #e0f2fe;
+
+    transform: scale(1.1);
+}
+
+.favorite-btn.favourite {
+    color: #ef4444;
+}
+
+
+/* =========================================
+   FEATURES
+========================================= */
+
+.features {
+    background-color: #f8fafc;
+}
+
+.features-container {
+    max-width: 1100px;
+
+    margin: auto;
+
+    display: grid;
+
+    grid-template-columns: 1fr;
+
+    gap: 25px;
+}
+
+.feature-card {
+    background-color: white;
+
+    text-align: center;
+
+    padding: 35px 25px;
+
+    border-radius: 14px;
+
+    box-shadow:
+        0 5px 20px rgba(0, 0, 0, 0.06);
+
+    transition: 0.3s;
+}
+
+.feature-card:hover {
+    transform: translateY(-5px);
+}
+
+.feature-icon {
+    font-size: 2.5rem;
+
+    margin-bottom: 15px;
+}
+
+.feature-card h3 {
+    margin-bottom: 10px;
+}
+
+.feature-card p {
+    color: #64748b;
+}
+
+
+/* =========================================
+   ABOUT SECTION
+========================================= */
+
+.about {
+    background-color: #0f172a;
+
+    color: white;
+}
+
+.about-content {
+    max-width: 800px;
+
+    margin: auto;
+
+    text-align: center;
+}
+
+.about-content h2 {
+    font-size: 2rem;
+
+    margin-bottom: 20px;
+}
+
+.about-content p {
+    color: #cbd5e1;
+
+    margin-bottom: 15px;
+}
+
+.about-content .btn {
+    margin-top: 15px;
+}
+
+
+/* =========================================
+   CONTACT SECTION
+========================================= */
+
+.contact-form {
+    max-width: 650px;
+
+    margin: auto;
+
+    background-color: #f8fafc;
+
+    padding: 30px;
+
+    border-radius: 14px;
+
+    box-shadow:
+        0 5px 20px rgba(0, 0, 0, 0.05);
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+
+    margin-bottom: 7px;
+
+    font-weight: bold;
+}
+
+.form-group input,
+.form-group textarea {
+    width: 100%;
+
+    padding: 12px;
+
+    border: 1px solid #cbd5e1;
+
+    border-radius: 8px;
+
+    background-color: white;
+
+    outline: none;
+
+    transition: 0.3s;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+    border-color: #0ea5e9;
+
+    box-shadow:
+        0 0 0 3px rgba(14, 165, 233, 0.1);
+}
+
+.contact-form button {
+    border: none;
+}
+
+
+/* =========================================
+   FOOTER
+========================================= */
+
+.footer {
+    background-color: #020617;
+
+    color: white;
+
+    padding: 40px 20px 20px;
+}
+
+.footer-content {
+    max-width: 1100px;
+
+    margin: auto;
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 25px;
+}
+
+.footer .logo {
+    color: white;
+}
+
+.footer p {
+    color: #94a3b8;
+
+    margin-top: 8px;
+}
+
+.footer-links {
+    display: flex;
+
+    flex-wrap: wrap;
+
+    gap: 15px;
+}
+
+.footer-links a {
+    color: #cbd5e1;
+
+    transition: 0.3s;
+}
+
+.footer-links a:hover {
+    color: #38bdf8;
+}
+
+.copyright {
+    max-width: 1100px;
+
+    margin: 30px auto 0;
+
+    padding-top: 20px;
+
+    border-top: 1px solid #1e293b;
+
+    text-align: center;
+}
+
+
+/* =========================================
+   TABLET — 768px
+========================================= */
+
+@media (min-width: 768px) {
+
+    .section {
+        padding: 90px 30px;
+    }
+
+
+    /* Hide mobile menu button */
+
+    .menu-btn {
+        display: none;
+    }
+
+
+    /* Desktop navigation */
+
+    .nav-links {
+        position: static;
+
+        width: auto;
+
+        display: flex;
+
+        flex-direction: row;
+
+        padding: 0;
+
+        box-shadow: none;
+
+        gap: 25px;
+    }
+
+    .nav-links li {
+        margin: 0;
+    }
+
+
+    /* Hero */
+
+    .hero h1 {
+        font-size: 3.5rem;
+    }
+
+    .hero-buttons {
+        flex-direction: row;
+
+        justify-content: center;
+    }
+
+
+    /* Destination cards */
+
+    .destination-container {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+
+    /* Features */
+
+    .features-container {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+
+    /* Footer */
+
+    .footer-content {
+        flex-direction: row;
+
+        justify-content: space-between;
+
+        align-items: center;
+    }
+
+}
+
+
+/* =========================================
+   DESKTOP — 1024px
+========================================= */
+
+@media (min-width: 1024px) {
+
+    .navbar {
+        padding: 18px 30px;
+    }
+
+
+    /* Hero */
+
+    .hero h1 {
+        font-size: 4.2rem;
+    }
+
+    .hero-description {
+        font-size: 1.1rem;
+    }
+
+
+    /* 3 destination cards per row */
+
+    .destination-container {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+
+    /* 3 feature cards per row */
+
+    .features-container {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+}
+/* ========================================
+   BOOK NOW BUTTON
+======================================== */
+
+.book-btn {
+    width: 100%;
+
+    margin-top: 15px;
+
+    padding: 11px 18px;
+
+    border: none;
+
+    border-radius: 8px;
+
+    background-color: #0ea5e9;
+
+    color: white;
+
+    font-weight: bold;
+
+    font-size: 0.95rem;
+
+    transition: 0.3s ease;
+}
+
+
+.book-btn:hover {
+    background-color: #0284c7;
+
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 5px 12px rgba(14, 165, 233, 0.25);
+}
+
+
+.book-btn:active {
+    transform: translateY(0);
+}
+/* ========================================
+   BOOKING MODAL
+======================================== */
+
+.booking-modal {
+    position: fixed;
+
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 100%;
+
+    background-color: rgba(15, 23, 42, 0.7);
+
+    display: none;
+
+    align-items: center;
+    justify-content: center;
+
+    padding: 20px;
+
+    z-index: 2000;
+}
+
+
+/* Show booking modal */
+
+.booking-modal.active {
+    display: flex;
+}
+
+
+/* Booking box */
+
+.booking-box {
+    position: relative;
+
+    width: 100%;
+    max-width: 500px;
+
+    max-height: 90vh;
+
+    overflow-y: auto;
+
+    background-color: white;
+
+    border-radius: 16px;
+
+    padding: 30px;
+
+    box-shadow:
+        0 20px 50px rgba(0, 0, 0, 0.2);
+
+    animation: bookingAppear 0.25s ease;
+}
+
+
+/* Popup animation */
+
+@keyframes bookingAppear {
+
+    from {
+        opacity: 0;
+        transform: translateY(20px) scale(0.97);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+
+}
+
+
+/* Booking heading */
+
+.booking-box h2 {
+    margin-bottom: 8px;
+
+    font-size: 1.8rem;
+
+    color: #0f172a;
+}
+
+
+/* Booking subtitle */
+
+.booking-subtitle {
+    color: #64748b;
+
+    margin-bottom: 25px;
+}
+
+
+/* Close button */
+
+.close-booking {
+    position: absolute;
+
+    top: 15px;
+    right: 15px;
+
+    width: 38px;
+    height: 38px;
+
+    border: none;
+
+    border-radius: 50%;
+
+    background-color: #f1f5f9;
+
+    color: #0f172a;
+
+    font-size: 1.6rem;
+
+    line-height: 1;
+
+    transition: 0.3s;
+}
+
+
+.close-booking:hover {
+    background-color: #e2e8f0;
+
+    transform: rotate(90deg);
+}
+
+
+/* Booking form */
+
+#bookingForm {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 0;
+}
+
+
+/* Booking inputs */
+
+#bookingForm input {
+    width: 100%;
+
+    padding: 12px;
+
+    border: 1px solid #cbd5e1;
+
+    border-radius: 8px;
+
+    outline: none;
+
+    background-color: white;
+
+    transition: 0.3s;
+}
+
+
+#bookingForm input:focus {
+    border-color: #0ea5e9;
+
+    box-shadow:
+        0 0 0 3px rgba(14, 165, 233, 0.1);
+}
+
+
+/* Readonly destination */
+
+#bookingDestination {
+    background-color: #f8fafc;
+
+    font-weight: bold;
+
+    color: #0f172a;
+}
+
+
+/* Confirm booking button */
+
+.booking-submit {
+    width: 100%;
+
+    border: none;
+
+    margin-top: 5px;
+}
+
+
+/* Mobile booking popup */
+
+@media (max-width: 500px) {
+
+    .booking-modal {
+        padding: 12px;
+    }
+
+
+    .booking-box {
+        padding: 25px 20px;
+
+        border-radius: 12px;
+    }
+
+
+    .booking-box h2 {
+        font-size: 1.5rem;
+    }
+
+}
+/* ========================================
+   DESTINATION SEARCH
+======================================== */
+
+.destination-search {
+    width: 100%;
+    max-width: 550px;
+
+    margin: 0 auto 40px;
+
+    display: flex;
+    justify-content: center;
+}
+
+
+#destinationSearch {
+    width: 100%;
+
+    padding: 14px 20px;
+
+    border: 1px solid #cbd5e1;
+
+    border-radius: 30px;
+
+    outline: none;
+
+    font-size: 1rem;
+
+    background-color: #ffffff;
+
+    color: #0f172a;
+
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.06);
+
+    transition: 0.3s ease;
+}
+
+
+#destinationSearch::placeholder {
+    color: #94a3b8;
+}
+
+
+#destinationSearch:focus {
+    border-color: #0ea5e9;
+
+    box-shadow:
+        0 0 0 4px rgba(14, 165, 233, 0.12);
+}
+/* ========================================
+   STEP 20 - MY FAVOURITES
+======================================== */
+
+.favourites-section {
+    padding: 80px 20px;
+    background: #fff7fb;
+}
+
+.favourites-container {
+    max-width: 1100px;
+    margin: 40px auto 0;
+    display: grid;
+    grid-template-columns: repeat(
+        auto-fit,
+        minmax(200px, 1fr)
+    );
+    gap: 20px;
+}
+
+.my-favourite-card {
+    background: white;
+    padding: 25px;
+    border-radius: 15px;
+    text-align: center;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+}
+
+.my-favourite-card span {
+    font-size: 30px;
+}
+
+.my-favourite-card h3 {
+    margin-top: 10px;
+}
+
+.no-favourites-message {
+    text-align: center;
+    width: 100%;
+    padding: 30px;
+}
+/* ========================================
+   STEP 21 - DESTINATION FILTERS
+======================================== */
+
+.destination-filters {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin: 25px auto 35px;
+}
+
+.filter-btn {
+    border: none;
+    padding: 10px 18px;
+    border-radius: 25px;
+    background: #f1f1f1;
+    cursor: pointer;
+    font-size: 14px;
+    transition: 0.3s ease;
+}
+
+.filter-btn:hover {
+    transform: translateY(-2px);
+}
+
+.filter-btn.active {
+    background: #333;
+    color: white;
+}
+/* ========================================
+   STEP 23 - VIEW DETAILS BUTTON
+======================================== */
+
+.card-buttons {
+    display: flex;
+    gap: 10px;
+    margin-top: 12px;
+}
+
+.details-btn {
+    flex: 1;
+    padding: 10px 12px;
+    border: 1px solid #333;
+    border-radius: 8px;
+    background: white;
+    color: #333;
+    cursor: pointer;
+    font-size: 14px;
+    transition: 0.3s ease;
+}
+
+.details-btn:hover {
+    background: #333;
+    color: white;
+}
+
+.card-buttons .book-btn {
+    flex: 1;
+    margin-top: 0;
+}
+/* ========================================
+   STEP 23 - DESTINATION DETAILS MODAL
+======================================== */
+
+.details-modal {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.65);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    z-index: 2000;
+}
+
+.details-modal.active {
+    display: flex;
+}
+
+.details-box {
+    width: min(500px, 100%);
+    max-height: 90vh;
+    overflow-y: auto;
+    background: white;
+    border-radius: 18px;
+    position: relative;
+    overflow: hidden;
+}
+
+.close-details {
+    position: absolute;
+    top: 12px;
+    right: 15px;
+    width: 38px;
+    height: 38px;
+    border: none;
+    border-radius: 50%;
+    background: rgba(0, 0, 0, 0.65);
+    color: white;
+    font-size: 24px;
+    cursor: pointer;
+    z-index: 2;
+}
+
+.details-image {
+    width: 100%;
+    height: 230px;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.details-content {
+    padding: 25px;
+}
+
+.details-content h2 {
+    margin: 5px 0;
+}
+
+.details-content > p {
+    line-height: 1.6;
+}
+
+.details-info {
+    display: flex;
+    gap: 15px;
+    margin: 20px 0;
+}
+
+.details-info div {
+    flex: 1;
+    padding: 15px;
+    background: #f5f5f5;
+    border-radius: 10px;
+}
+
+.details-info strong,
+.details-info span {
+    display: block;
+}
+
+.details-info span {
+    margin-top: 6px;
+}
+
+.details-book-btn {
+    width: 100%;
+}
+/* ========================================
+   STEP 25 - FAVOURITE CARDS
+======================================== */
+
+.favourites-container {
+    display: grid;
+    grid-template-columns: repeat(
+        auto-fit,
+        minmax(250px, 1fr)
+    );
+    gap: 25px;
+    margin-top: 30px;
+}
+
+.no-favourites-message {
+    text-align: center;
+    width: 100%;
+    padding: 30px;
+}
+
+.favourite-card {
+    background: white;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+}
+
+.favourite-card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+.favourite-card-content {
+    padding: 20px;
+}
+
+.favourite-card-content h3 {
+    margin-bottom: 10px;
+}
+
+.favourite-card-content p {
+    line-height: 1.6;
+    margin-bottom: 12px;
+}
+
+.favourite-card-content strong {
+    display: block;
+    margin-bottom: 15px;
+}
+
+.favourite-card-buttons {
+    display: flex;
+    gap: 10px;
+}
+
+.favourite-card-buttons .details-btn,
+.favourite-card-buttons .book-btn {
+    flex: 1;
+}
+
+@media (max-width: 600px) {
+
+    .favourite-card-buttons {
+        flex-direction: column;
+    }
+
+}
+/* ========================================
+   STEP 26 - BOOKING CONFIRMATION
+======================================== */
+
+.booking-success {
+    text-align: center;
+    padding: 20px 10px;
+}
+
+.success-icon {
+    width: 65px;
+    height: 65px;
+    margin: 0 auto 15px;
+    border-radius: 50%;
+    background: #2e9d55;
+    color: white;
+    font-size: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.booking-success h3 {
+    margin-bottom: 10px;
+    font-size: 24px;
+}
+
+.booking-summary {
+    margin: 20px 0;
+    padding: 15px;
+    border-radius: 10px;
+    background: #f5f5f5;
+    text-align: left;
+}
+
+.booking-summary p {
+    margin: 8px 0;
+}
+/* ========================================
+   STEP 27C - TRAVEL BUDGET CALCULATOR
+======================================== */
+
+.budget {
+    padding: 80px 20px;
+}
+
+.budget-calculator {
+    width: 100%;
+    max-width: 600px;
+    margin: 40px auto 0;
+    padding: 35px;
+    background: white;
+    border-radius: 20px;
+    box-shadow: 0 10px 35px rgba(0, 0, 0, 0.10);
+}
+
+.budget-calculator .form-group {
+    margin-bottom: 20px;
+}
+
+.budget-calculator label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+}
+
+.budget-calculator input,
+.budget-calculator select {
+    width: 100%;
+    padding: 13px 15px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    font-size: 15px;
+    outline: none;
+    background: white;
+}
+
+.budget-calculator input:focus,
+.budget-calculator select:focus {
+    border-color: #ff6b6b;
+    box-shadow: 0 0 0 3px rgba(255, 107, 107, 0.12);
+}
+
+.budget-calculator .primary-btn {
+    width: 100%;
+    margin-top: 5px;
+    cursor: pointer;
+    border: none;
+}
+
+.budget-result {
+    margin-top: 30px;
+    padding: 25px;
+    text-align: center;
+    border-radius: 15px;
+    background: #f8f9fa;
+    border: 1px solid #eee;
+}
+
+.budget-result h3 {
+    margin-bottom: 12px;
+}
+
+.budget-result p {
+    margin: 8px 0;
+}
+
+.budget-result strong {
+    display: block;
+    margin-top: 15px;
+    font-size: 32px;
+}
+
+.budget-success {
+    margin-top: 15px !important;
+    font-weight: 600;
+}
+
+
+/* ========================================
+   MOBILE BUDGET CALCULATOR
+======================================== */
+
+@media (max-width: 600px) {
+
+    .budget {
+        padding: 60px 15px;
+    }
+
+    .budget-calculator {
+        padding: 25px 20px;
+        margin-top: 30px;
+    }
+
+    .budget-result strong {
+        font-size: 27px;
+    }
+
+}
+/* ========================================
+   STEP 28C - TRIP PLANNER STYLING
+======================================== */
+
+.trip-planner {
+    padding: 80px 20px;
+}
+
+.trip-planner-container {
+    width: 100%;
+    max-width: 650px;
+    margin: 40px auto 0;
+    padding: 35px;
+    background: white;
+    border-radius: 20px;
+    box-shadow: 0 10px 35px rgba(0, 0, 0, 0.10);
+}
+
+.trip-planner-container .form-group {
+    margin-bottom: 22px;
+}
+
+.trip-planner-container label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+}
+
+.trip-planner-container select,
+.trip-planner-container input[type="date"],
+.trip-planner-container input[type="number"] {
+    width: 100%;
+    padding: 13px 15px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    font-size: 15px;
+    outline: none;
+    background: white;
+}
+
+.trip-planner-container select:focus,
+.trip-planner-container input:focus {
+    border-color: #ff6b6b;
+    box-shadow: 0 0 0 3px rgba(255, 107, 107, 0.12);
+}
+
+
+/* ========================================
+   ACTIVITY OPTIONS
+======================================== */
+
+.activity-options {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-top: 10px;
+}
+
+.activity-option {
+    display: flex !important;
+    align-items: center;
+    gap: 8px;
+    padding: 13px;
+    background: #f8f9fa;
+    border: 1px solid #eee;
+    border-radius: 10px;
+    cursor: pointer;
+    font-weight: 500 !important;
+}
+
+.activity-option:hover {
+    transform: translateY(-2px);
+}
+
+.activity-option input {
+    width: auto;
+    cursor: pointer;
+}
+
+
+/* ========================================
+   CREATE PLAN BUTTON
+======================================== */
+
+.trip-planner-container .primary-btn {
+    width: 100%;
+    border: none;
+    cursor: pointer;
+}
+
+
+/* ========================================
+   TRIP PLAN RESULT
+======================================== */
+
+.trip-plan-result {
+    margin-top: 30px;
+    padding: 25px;
+    background: #f8f9fa;
+    border-radius: 15px;
+    border: 1px solid #eee;
+}
+
+.trip-plan-result h3 {
+    margin-bottom: 18px;
+    text-align: center;
+}
+
+.trip-plan-details {
+    margin-top: 15px;
+}
+
+.trip-plan-details p {
+    margin: 12px 0;
+    line-height: 1.6;
+}
+
+.trip-message {
+    margin-top: 20px;
+    padding: 15px;
+    text-align: center;
+    border-radius: 10px;
+    font-weight: 500;
+}
+
+
+/* ========================================
+   MOBILE
+======================================== */
+
+@media (max-width: 600px) {
+
+    .trip-planner {
+        padding: 60px 15px;
+    }
+
+    .trip-planner-container {
+        padding: 25px 20px;
+        margin-top: 30px;
+    }
+
+    .activity-options {
+        grid-template-columns: 1fr;
+    }
+
+}

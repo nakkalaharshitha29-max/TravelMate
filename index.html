@@ -1,0 +1,1799 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="description"
+        content="TravelMate - Discover beautiful destinations and plan your perfect journey.">
+
+    <title>TravelMate | Explore The World</title>
+
+    <link rel="stylesheet" href="style.css">
+
+</head>
+
+
+<body>
+
+
+    <!-- ========================================
+         NAVIGATION BAR
+    ========================================= -->
+
+    <header class="header">
+
+        <nav class="navbar">
+
+            <a href="#home" class="logo">
+                Travel<span>Mate</span>
+            </a>
+
+
+            <button
+                class="menu-btn"
+                id="menuBtn"
+                aria-label="Open navigation menu">
+
+                ☰
+
+            </button>
+
+
+            <ul class="nav-links" id="navLinks">
+
+                <li>
+                    <a href="#home">Home</a>
+                </li>
+
+                <li>
+                    <a href="#destinations">Destinations</a>
+                </li>
+
+                <li>
+                    <a href="#features">Why Us</a>
+                </li>
+
+                <li>
+                    <a href="#budget">Budget</a>
+                </li>
+
+                <li>
+                    <a href="#favourites">Favourites ❤️</a>
+                </li>
+
+                <li>
+                    <a href="#tripPlanner">Trip Planner</a>
+                </li>
+
+                <li>
+                    <a href="#weather">Weather</a>
+                </li>
+
+                <li>
+                    <a href="#about">About</a>
+                </li>
+
+                <li>
+                    <a href="#contact">Contact</a>
+                </li>
+
+            </ul>
+
+        </nav>
+
+    </header>
+
+
+
+    <!-- ========================================
+         MAIN CONTENT
+    ========================================= -->
+
+    <main>
+
+
+        <!-- ========================================
+             HERO SECTION
+        ========================================= -->
+
+        <section class="hero" id="home">
+
+            <div class="hero-content">
+
+                <p class="hero-small-text">
+                    YOUR JOURNEY STARTS HERE
+                </p>
+
+                <h1>
+
+                    Explore The World,
+
+                    <span>
+                        One Trip At A Time.
+                    </span>
+
+                </h1>
+
+                <p class="hero-description">
+
+                    Discover beautiful destinations,
+                    plan unforgettable journeys and
+                    create memories that last forever.
+
+                </p>
+
+                <div class="hero-buttons">
+
+                    <a
+                        href="#destinations"
+                        class="btn primary-btn">
+
+                        Explore Destinations
+
+                    </a>
+
+
+                    <a
+                        href="#about"
+                        class="btn secondary-btn">
+
+                        Learn More
+
+                    </a>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- ========================================
+             DESTINATIONS SECTION
+        ========================================= -->
+
+        <section
+            class="destinations section"
+            id="destinations">
+
+
+            <div class="section-heading">
+
+                <p class="section-label">
+                    DISCOVER
+                </p>
+
+                <h2>
+                    Popular Destinations
+                </h2>
+
+                <p>
+                    Explore some of the most beautiful
+                    places for your next adventure.
+                </p>
+
+            </div>
+
+
+
+            <!-- SEARCH -->
+
+            <div class="destination-search">
+
+                <input
+                    type="text"
+                    id="destinationSearch"
+                    placeholder="Search destinations..."
+                    aria-label="Search destinations">
+
+            </div>
+
+
+
+            <!-- FILTERS -->
+
+            <div class="destination-filters">
+
+                <button
+                    class="filter-btn active"
+                    data-filter="all">
+
+                    All
+
+                </button>
+
+                <button
+                    class="filter-btn"
+                    data-filter="beach">
+
+                    🏖️ Beaches
+
+                </button>
+
+                <button
+                    class="filter-btn"
+                    data-filter="mountain">
+
+                    🏔️ Mountains
+
+                </button>
+
+                <button
+                    class="filter-btn"
+                    data-filter="nature">
+
+                    🌿 Nature
+
+                </button>
+
+                <button
+                    class="filter-btn"
+                    data-filter="history">
+
+                    🏰 History
+
+                </button>
+
+            </div>
+
+
+
+            <!-- SEARCH MESSAGE -->
+
+            <p
+                id="searchMessage"
+                class="search-message"
+                style="display:none;">
+
+                No destinations found.
+
+            </p>
+
+
+
+            <!-- DESTINATION CARDS -->
+
+            <div class="destination-container">
+
+
+                <!-- HYDERABAD -->
+
+                <article
+                    class="destination-card"
+                    data-category="history">
+
+                    <div class="destination-image image-hyderabad">
+
+                        <img
+                            src="images/hyderabad.jpg"
+                            alt="Hyderabad travel destination">
+
+                        <span>
+                            India
+                        </span>
+
+                    </div>
+
+
+                    <div class="card-content">
+
+                        <h3>
+                            Hyderabad
+                        </h3>
+
+                        <p>
+                            Explore historic monuments,
+                            delicious food and beautiful
+                            city attractions.
+                        </p>
+
+
+                        <div class="card-bottom">
+
+                            <strong>
+                                ₹5,999
+                            </strong>
+
+
+                            <button
+                                class="favorite-btn"
+                                aria-label="Add Hyderabad to favourites">
+
+                                ♡
+
+                            </button>
+
+                        </div>
+
+
+                        <div class="card-actions">
+
+                            <button
+                                class="details-btn"
+                                onclick="showDestinationDetails('Hyderabad')">
+
+                                View Details
+
+                            </button>
+
+
+                            <button
+                                class="book-btn"
+                                onclick="bookDestination('Hyderabad')">
+
+                                Book Now
+
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                </article>
+
+
+
+                <!-- GOA -->
+
+                <article
+                    class="destination-card"
+                    data-category="beach">
+
+                    <div class="destination-image image-goa">
+
+                        <img
+                            src="images/goa.jpg"
+                            alt="Goa travel destination">
+
+                        <span>
+                            India
+                        </span>
+
+                    </div>
+
+
+                    <div class="card-content">
+
+                        <h3>
+                            Goa
+                        </h3>
+
+                        <p>
+                            Relax on beautiful beaches
+                            and enjoy an unforgettable
+                            coastal experience.
+                        </p>
+
+
+                        <div class="card-bottom">
+
+                            <strong>
+                                ₹7,499
+                            </strong>
+
+
+                            <button
+                                class="favorite-btn"
+                                aria-label="Add Goa to favourites">
+
+                                ♡
+
+                            </button>
+
+                        </div>
+
+
+                        <div class="card-actions">
+
+                            <button
+                                class="details-btn"
+                                onclick="showDestinationDetails('Goa')">
+
+                                View Details
+
+                            </button>
+
+
+                            <button
+                                class="book-btn"
+                                onclick="bookDestination('Goa')">
+
+                                Book Now
+
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                </article>
+
+
+
+                <!-- MANALI -->
+
+                <article
+                    class="destination-card"
+                    data-category="mountain">
+
+                    <div class="destination-image image-manali">
+
+                        <img
+                            src="images/manali.jpg"
+                            alt="Manali travel destination">
+
+                        <span>
+                            India
+                        </span>
+
+                    </div>
+
+
+                    <div class="card-content">
+
+                        <h3>
+                            Manali
+                        </h3>
+
+                        <p>
+                            Experience mountains,
+                            nature and peaceful surroundings
+                            in the Himalayas.
+                        </p>
+
+
+                        <div class="card-bottom">
+
+                            <strong>
+                                ₹8,999
+                            </strong>
+
+
+                            <button
+                                class="favorite-btn"
+                                aria-label="Add Manali to favourites">
+
+                                ♡
+
+                            </button>
+
+                        </div>
+
+
+                        <div class="card-actions">
+
+                            <button
+                                class="details-btn"
+                                onclick="showDestinationDetails('Manali')">
+
+                                View Details
+
+                            </button>
+
+
+                            <button
+                                class="book-btn"
+                                onclick="bookDestination('Manali')">
+
+                                Book Now
+
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                </article>
+
+
+
+                <!-- KERALA -->
+
+                <article
+                    class="destination-card"
+                    data-category="nature">
+
+                    <div class="destination-image image-kerala">
+
+                        <img
+                            src="images/kerala.jpg"
+                            alt="Kerala travel destination">
+
+                        <span>
+                            India
+                        </span>
+
+                    </div>
+
+
+                    <div class="card-content">
+
+                        <h3>
+                            Kerala
+                        </h3>
+
+                        <p>
+                            Enjoy peaceful backwaters,
+                            greenery and beautiful
+                            natural landscapes.
+                        </p>
+
+
+                        <div class="card-bottom">
+
+                            <strong>
+                                ₹6,999
+                            </strong>
+
+
+                            <button
+                                class="favorite-btn"
+                                aria-label="Add Kerala to favourites">
+
+                                ♡
+
+                            </button>
+
+                        </div>
+
+
+                        <div class="card-actions">
+
+                            <button
+                                class="details-btn"
+                                onclick="showDestinationDetails('Kerala')">
+
+                                View Details
+
+                            </button>
+
+
+                            <button
+                                class="book-btn"
+                                onclick="bookDestination('Kerala')">
+
+                                Book Now
+
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                </article>
+
+
+
+                <!-- RAJASTHAN -->
+
+                <article
+                    class="destination-card"
+                    data-category="history">
+
+                    <div class="destination-image image-rajasthan">
+
+                        <img
+                            src="images/rajasthan.jpg"
+                            alt="Rajasthan travel destination">
+
+                        <span>
+                            India
+                        </span>
+
+                    </div>
+
+
+                    <div class="card-content">
+
+                        <h3>
+                            Rajasthan
+                        </h3>
+
+                        <p>
+                            Discover royal palaces,
+                            forts and the colourful
+                            culture of Rajasthan.
+                        </p>
+
+
+                        <div class="card-bottom">
+
+                            <strong>
+                                ₹9,499
+                            </strong>
+
+
+                            <button
+                                class="favorite-btn"
+                                aria-label="Add Rajasthan to favourites">
+
+                                ♡
+
+                            </button>
+
+                        </div>
+
+
+                        <div class="card-actions">
+
+                            <button
+                                class="details-btn"
+                                onclick="showDestinationDetails('Rajasthan')">
+
+                                View Details
+
+                            </button>
+
+
+                            <button
+                                class="book-btn"
+                                onclick="bookDestination('Rajasthan')">
+
+                                Book Now
+
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                </article>
+
+
+
+                <!-- ANDAMAN -->
+
+                <article
+                    class="destination-card"
+                    data-category="beach">
+
+                    <div class="destination-image image-andaman">
+
+                        <img
+                            src="images/andaman.jpg"
+                            alt="Andaman travel destination">
+
+                        <span>
+                            India
+                        </span>
+
+                    </div>
+
+
+                    <div class="card-content">
+
+                        <h3>
+                            Andaman
+                        </h3>
+
+                        <p>
+                            Discover crystal-clear water,
+                            beaches and tropical island
+                            adventures.
+                        </p>
+
+
+                        <div class="card-bottom">
+
+                            <strong>
+                                ₹12,999
+                            </strong>
+
+
+                            <button
+                                class="favorite-btn"
+                                aria-label="Add Andaman to favourites">
+
+                                ♡
+
+                            </button>
+
+                        </div>
+
+
+                        <div class="card-actions">
+
+                            <button
+                                class="details-btn"
+                                onclick="showDestinationDetails('Andaman')">
+
+                                View Details
+
+                            </button>
+
+
+                            <button
+                                class="book-btn"
+                                onclick="bookDestination('Andaman')">
+
+                                Book Now
+
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                </article>
+
+
+            </div>
+
+        </section>
+
+
+
+        <!-- ========================================
+             WHY TRAVELMATE
+        ========================================= -->
+
+        <section
+            class="features section"
+            id="features">
+
+
+            <div class="section-heading">
+
+                <p class="section-label">
+                    WHY TRAVELMATE
+                </p>
+
+                <h2>
+                    Travel Made Simple
+                </h2>
+
+                <p>
+                    Everything you need to make
+                    your journey easier.
+                </p>
+
+            </div>
+
+
+            <div class="features-container">
+
+
+                <article class="feature-card">
+
+                    <div class="feature-icon">
+                        🌎
+                    </div>
+
+                    <h3>
+                        Amazing Destinations
+                    </h3>
+
+                    <p>
+                        Discover beautiful destinations
+                        for every type of traveller.
+                    </p>
+
+                </article>
+
+
+                <article class="feature-card">
+
+                    <div class="feature-icon">
+                        💰
+                    </div>
+
+                    <h3>
+                        Affordable Packages
+                    </h3>
+
+                    <p>
+                        Find travel packages that match
+                        your budget without compromising
+                        your experience.
+                    </p>
+
+                </article>
+
+
+                <article class="feature-card">
+
+                    <div class="feature-icon">
+                        ❤️
+                    </div>
+
+                    <h3>
+                        Easy Planning
+                    </h3>
+
+                    <p>
+                        Plan your trips easily and keep
+                        your favourite destinations
+                        in one place.
+                    </p>
+
+                </article>
+
+
+            </div>
+
+        </section>
+
+
+
+        <!-- ========================================
+             TRAVEL BUDGET CALCULATOR
+        ========================================= -->
+
+        <section
+            class="budget section"
+            id="budget">
+
+
+            <div class="section-heading">
+
+                <p class="section-label">
+                    PLAN YOUR BUDGET
+                </p>
+
+                <h2>
+                    Travel Budget Calculator
+                </h2>
+
+                <p>
+                    Estimate your trip cost before you travel.
+                </p>
+
+            </div>
+
+
+            <div class="budget-calculator">
+
+
+                <div class="form-group">
+
+                    <label for="budgetDestination">
+                        Destination
+                    </label>
+
+                    <select id="budgetDestination">
+
+                        <option value="">
+                            Select Destination
+                        </option>
+
+                        <option value="5999">
+                            Hyderabad
+                        </option>
+
+                        <option value="7499">
+                            Goa
+                        </option>
+
+                        <option value="8999">
+                            Manali
+                        </option>
+
+                        <option value="6999">
+                            Kerala
+                        </option>
+
+                        <option value="9499">
+                            Rajasthan
+                        </option>
+
+                        <option value="12999">
+                            Andaman
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="budgetPeople">
+                        Number of People
+                    </label>
+
+                    <input
+                        type="number"
+                        id="budgetPeople"
+                        min="1"
+                        max="20"
+                        value="1"
+                        placeholder="Enter number of people">
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="budgetNights">
+                        Number of Nights
+                    </label>
+
+                    <input
+                        type="number"
+                        id="budgetNights"
+                        min="1"
+                        max="30"
+                        value="1"
+                        placeholder="Enter number of nights">
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="hotelType">
+                        Hotel Type
+                    </label>
+
+                    <select id="hotelType">
+
+                        <option value="1000">
+                            Budget Hotel - ₹1,000/night
+                        </option>
+
+                        <option value="2000">
+                            Standard Hotel - ₹2,000/night
+                        </option>
+
+                        <option value="3500">
+                            Premium Hotel - ₹3,500/night
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <button
+                    type="button"
+                    class="btn primary-btn"
+                    id="calculateBudget">
+
+                    Calculate Budget
+
+                </button>
+
+
+                <div
+                    class="budget-result"
+                    id="budgetResult">
+
+                    <h3>
+                        Estimated Trip Cost
+                    </h3>
+
+                    <p>
+                        Select your destination
+                        and travel details.
+                    </p>
+
+                    <strong id="totalBudget">
+                        ₹0
+                    </strong>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- ========================================
+             FAVOURITE DESTINATIONS
+        ========================================= -->
+
+        <section
+            class="favourites section"
+            id="favourites">
+
+
+            <div class="section-heading">
+
+                <p class="section-label">
+                    YOUR CHOICES
+                </p>
+
+                <h2>
+                    My Favourite Destinations ❤️
+                </h2>
+
+                <p>
+                    Your saved travel destinations
+                    appear here.
+                </p>
+
+            </div>
+
+
+            <div
+                class="favourites-container"
+                id="favouritesContainer">
+
+
+                <div
+                    class="no-favourites-message"
+                    id="noFavouritesMessage">
+
+                    <h3>
+                        No Favourite Destinations Yet ❤️
+                    </h3>
+
+                    <p>
+                        Click the ♡ button on a destination
+                        to save it here.
+                    </p>
+
+                </div>
+
+
+            </div>
+
+        </section>
+
+
+
+        <!-- ========================================
+             TRIP PLANNER
+        ========================================= -->
+
+        <section
+            class="trip-planner section"
+            id="tripPlanner">
+
+
+            <div class="section-heading">
+
+                <p class="section-label">
+                    PLAN YOUR JOURNEY
+                </p>
+
+                <h2>
+                    Create Your Trip Plan
+                </h2>
+
+                <p>
+                    Choose your destination and
+                    travel preferences.
+                </p>
+
+            </div>
+
+
+            <div class="trip-planner-container">
+
+
+                <div class="form-group">
+
+                    <label for="tripDestination">
+                        Destination
+                    </label>
+
+                    <select id="tripDestination">
+
+                        <option value="">
+                            Select Destination
+                        </option>
+
+                        <option value="Hyderabad">
+                            Hyderabad
+                        </option>
+
+                        <option value="Goa">
+                            Goa
+                        </option>
+
+                        <option value="Manali">
+                            Manali
+                        </option>
+
+                        <option value="Kerala">
+                            Kerala
+                        </option>
+
+                        <option value="Rajasthan">
+                            Rajasthan
+                        </option>
+
+                        <option value="Andaman">
+                            Andaman
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="tripDate">
+                        Travel Date
+                    </label>
+
+                    <input
+                        type="date"
+                        id="tripDate">
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="tripPeople">
+                        Number of People
+                    </label>
+
+                    <input
+                        type="number"
+                        id="tripPeople"
+                        min="1"
+                        max="20"
+                        value="1">
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="tripDays">
+                        Number of Days
+                    </label>
+
+                    <input
+                        type="number"
+                        id="tripDays"
+                        min="1"
+                        max="30"
+                        value="3">
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>
+                        Choose Activities
+                    </label>
+
+
+                    <div class="activity-options">
+
+
+                        <label class="activity-option">
+
+                            <input
+                                type="checkbox"
+                                value="Sightseeing"
+                                name="activities">
+
+                            🏛️ Sightseeing
+
+                        </label>
+
+
+                        <label class="activity-option">
+
+                            <input
+                                type="checkbox"
+                                value="Food"
+                                name="activities">
+
+                            🍴 Food & Restaurants
+
+                        </label>
+
+
+                        <label class="activity-option">
+
+                            <input
+                                type="checkbox"
+                                value="Adventure"
+                                name="activities">
+
+                            🧗 Adventure
+
+                        </label>
+
+
+                        <label class="activity-option">
+
+                            <input
+                                type="checkbox"
+                                value="Shopping"
+                                name="activities">
+
+                            🛍️ Shopping
+
+                        </label>
+
+
+                    </div>
+
+                </div>
+
+
+                <button
+                    type="button"
+                    class="btn primary-btn"
+                    id="createTripPlan">
+
+                    Create My Trip Plan
+
+                </button>
+
+
+                <div
+                    class="trip-plan-result"
+                    id="tripPlanResult">
+
+                    <h3>
+                        Your Trip Plan
+                    </h3>
+
+                    <p>
+                        Select your travel details
+                        and create your plan.
+                    </p>
+
+                </div>
+
+
+            </div>
+
+        </section>
+
+
+
+        <!-- ========================================
+             WEATHER SECTION
+        ========================================= -->
+
+        <section
+            class="weather section"
+            id="weather">
+
+
+            <div class="section-heading">
+
+                <p class="section-label">
+                    TRAVEL WEATHER
+                </p>
+
+                <h2>
+                    Check Destination Weather 🌤️
+                </h2>
+
+                <p>
+                    Select a destination to see its
+                    typical weather conditions.
+                </p>
+
+            </div>
+
+
+            <div class="weather-container">
+
+
+                <div class="form-group">
+
+                    <label for="weatherDestination">
+                        Select Destination
+                    </label>
+
+                    <select id="weatherDestination">
+
+                        <option value="">
+                            Choose a destination
+                        </option>
+
+                        <option value="Hyderabad">
+                            Hyderabad
+                        </option>
+
+                        <option value="Goa">
+                            Goa
+                        </option>
+
+                        <option value="Manali">
+                            Manali
+                        </option>
+
+                        <option value="Kerala">
+                            Kerala
+                        </option>
+
+                        <option value="Rajasthan">
+                            Rajasthan
+                        </option>
+
+                        <option value="Andaman">
+                            Andaman
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <button
+                    type="button"
+                    class="btn primary-btn"
+                    id="checkWeather">
+
+                    Check Weather
+
+                </button>
+
+
+                <div
+                    class="weather-result"
+                    id="weatherResult">
+
+                    <div class="weather-icon">
+                        🌤️
+                    </div>
+
+                    <h3>
+                        Select a destination
+                    </h3>
+
+                    <p>
+                        Weather information will appear here.
+                    </p>
+
+                </div>
+
+
+            </div>
+
+        </section>
+
+
+
+        <!-- ========================================
+             ABOUT SECTION
+        ========================================= -->
+
+        <section
+            class="about section"
+            id="about">
+
+
+            <div class="about-content">
+
+                <p class="section-label">
+                    ABOUT US
+                </p>
+
+                <h2>
+                    Your Travel Companion
+                </h2>
+
+                <p>
+
+                    TravelMate is a simple travel
+                    planning platform designed to
+                    help travellers discover exciting
+                    destinations and plan memorable
+                    journeys.
+
+                </p>
+
+                <p>
+
+                    Whether you are looking for
+                    beaches, mountains, historical
+                    places or peaceful getaways,
+                    TravelMate helps you find your
+                    next adventure.
+
+                </p>
+
+
+                <a
+                    href="#contact"
+                    class="btn primary-btn">
+
+                    Contact Us
+
+                </a>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- ========================================
+             CONTACT SECTION
+        ========================================= -->
+
+        <section
+            class="contact section"
+            id="contact">
+
+
+            <div class="section-heading">
+
+                <p class="section-label">
+                    GET IN TOUCH
+                </p>
+
+                <h2>
+                    Plan Your Next Adventure
+                </h2>
+
+                <p>
+                    Have a question?
+                    Send us a message.
+                </p>
+
+            </div>
+
+
+            <form
+                class="contact-form"
+                id="contactForm">
+
+
+                <div class="form-group">
+
+                    <label for="name">
+                        Your Name
+                    </label>
+
+                    <input
+                        type="text"
+                        id="name"
+                        name="name"
+                        placeholder="Enter your name"
+                        required>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="email">
+                        Email Address
+                    </label>
+
+                    <input
+                        type="email"
+                        id="email"
+                        name="email"
+                        placeholder="Enter your email"
+                        required>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="message">
+                        Message
+                    </label>
+
+                    <textarea
+                        id="message"
+                        name="message"
+                        rows="5"
+                        placeholder="Tell us about your travel plans..."
+                        required></textarea>
+
+                </div>
+
+
+                <button
+                    type="submit"
+                    class="btn primary-btn">
+
+                    Send Message
+
+                </button>
+
+
+            </form>
+
+        </section>
+
+
+    </main>
+
+
+
+    <!-- ========================================
+         FOOTER
+    ========================================= -->
+
+    <footer class="footer">
+
+
+        <div class="footer-content">
+
+
+            <div>
+
+                <a
+                    href="#home"
+                    class="logo">
+
+                    Travel<span>Mate</span>
+
+                </a>
+
+                <p>
+                    Explore. Discover. Experience.
+                </p>
+
+            </div>
+
+
+            <div class="footer-links">
+
+                <a href="#home">
+                    Home
+                </a>
+
+                <a href="#destinations">
+                    Destinations
+                </a>
+
+                <a href="#budget">
+                    Budget
+                </a>
+
+                <a href="#favourites">
+                    Favourites
+                </a>
+
+                <a href="#tripPlanner">
+                    Trip Planner
+                </a>
+
+                <a href="#weather">
+                    Weather
+                </a>
+
+                <a href="#about">
+                    About
+                </a>
+
+                <a href="#contact">
+                    Contact
+                </a>
+
+            </div>
+
+
+        </div>
+
+
+        <div class="copyright">
+
+            <p>
+                © 2026 TravelMate.
+                All Rights Reserved.
+            </p>
+
+        </div>
+
+
+    </footer>
+
+
+
+    <!-- ========================================
+         BOOKING MODAL
+    ========================================= -->
+
+    <div
+        class="booking-modal"
+        id="bookingModal">
+
+
+        <div class="booking-box">
+
+
+            <button
+                class="close-booking"
+                id="closeBooking"
+                aria-label="Close booking form">
+
+                ×
+
+            </button>
+
+
+            <h2>
+                Book Your Trip
+            </h2>
+
+
+            <p class="booking-subtitle">
+
+                Plan your next adventure with
+                TravelMate.
+
+            </p>
+
+
+            <form id="bookingForm">
+
+
+                <div class="form-group">
+
+                    <label for="bookingDestination">
+                        Destination
+                    </label>
+
+                    <input
+                        type="text"
+                        id="bookingDestination"
+                        name="destination"
+                        readonly>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="bookingName">
+                        Your Name
+                    </label>
+
+                    <input
+                        type="text"
+                        id="bookingName"
+                        name="name"
+                        placeholder="Enter your name"
+                        required>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="bookingEmail">
+                        Email Address
+                    </label>
+
+                    <input
+                        type="email"
+                        id="bookingEmail"
+                        name="email"
+                        placeholder="Enter your email"
+                        required>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="travelDate">
+                        Travel Date
+                    </label>
+
+                    <input
+                        type="date"
+                        id="travelDate"
+                        name="travelDate"
+                        required>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="numberOfPeople">
+                        Number of People
+                    </label>
+
+                    <input
+                        type="number"
+                        id="numberOfPeople"
+                        name="people"
+                        min="1"
+                        max="20"
+                        value="1"
+                        required>
+
+                </div>
+
+
+                <button
+                    type="submit"
+                    class="btn primary-btn booking-submit">
+
+                    Confirm Booking
+
+                </button>
+
+
+            </form>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- ========================================
+         DESTINATION DETAILS MODAL
+    ========================================= -->
+
+    <div
+        class="details-modal"
+        id="detailsModal">
+
+
+        <div class="details-box">
+
+
+            <button
+                class="close-details"
+                id="closeDetails"
+                aria-label="Close destination details">
+
+                ×
+
+            </button>
+
+
+            <div
+                class="details-image"
+                id="detailsImage">
+            </div>
+
+
+            <div class="details-content">
+
+                <p
+                    class="details-country"
+                    id="detailsCountry">
+                </p>
+
+
+                <h2 id="detailsTitle">
+                </h2>
+
+
+                <p id="detailsDescription">
+                </p>
+
+
+                <strong id="detailsPrice">
+                </strong>
+
+
+                <button
+                    class="btn primary-btn"
+                    id="detailsBookButton">
+
+                    Book Now
+
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- ========================================
+         JAVASCRIPT
+    ========================================= -->
+
+    <script src="script.js"></script>
+
+
+</body>
+
+</html>
