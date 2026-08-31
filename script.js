@@ -13,26 +13,20 @@ const navLinks = document.getElementById("navLinks");
 if (menuBtn && navLinks) {
 
     menuBtn.addEventListener("click", function () {
-
         navLinks.classList.toggle("active");
-
     });
 
-    const navigationLinks =
-        navLinks.querySelectorAll("a");
+    const navigationLinks = navLinks.querySelectorAll("a");
 
     navigationLinks.forEach(function (link) {
 
         link.addEventListener("click", function () {
-
             navLinks.classList.remove("active");
-
         });
 
     });
 
 }
-
 
 
 // ========================================
@@ -63,13 +57,16 @@ function filterDestinations() {
 
     let foundDestination = false;
 
-
     destinationCards.forEach(function (card) {
 
+        const heading = card.querySelector("h3");
+
+        if (!heading) {
+            return;
+        }
+
         const destinationName =
-            card.querySelector("h3")
-                .textContent
-                .toLowerCase();
+            heading.textContent.toLowerCase();
 
         const cardCategory =
             card.getAttribute("data-category");
@@ -80,7 +77,6 @@ function filterDestinations() {
         const matchesCategory =
             selectedCategory === "all" ||
             cardCategory === selectedCategory;
-
 
         if (matchesSearch && matchesCategory) {
 
@@ -124,13 +120,11 @@ filterButtons.forEach(function (button) {
         selectedCategory =
             button.getAttribute("data-filter");
 
-
         filterButtons.forEach(function (btn) {
 
             btn.classList.remove("active");
 
         });
-
 
         button.classList.add("active");
 
@@ -139,7 +133,6 @@ filterButtons.forEach(function (button) {
     });
 
 });
-
 
 
 // ========================================
@@ -158,11 +151,8 @@ const noFavouritesMessage =
 
 let savedFavourites =
     JSON.parse(
-        localStorage.getItem(
-            "travelMateFavourites"
-        )
+        localStorage.getItem("travelMateFavourites")
     ) || [];
-
 
 
 // ========================================
@@ -175,39 +165,28 @@ function displayFavourites() {
         return;
     }
 
-
     const oldCards =
         favouritesContainer.querySelectorAll(
             ".favourite-card"
         );
 
-
     oldCards.forEach(function (card) {
-
         card.remove();
-
     });
 
 
     if (savedFavourites.length === 0) {
 
         if (noFavouritesMessage) {
-
-            noFavouritesMessage.style.display =
-                "block";
-
+            noFavouritesMessage.style.display = "block";
         }
 
         return;
-
     }
 
 
     if (noFavouritesMessage) {
-
-        noFavouritesMessage.style.display =
-            "none";
-
+        noFavouritesMessage.style.display = "none";
     }
 
 
@@ -217,10 +196,15 @@ function displayFavourites() {
             Array.from(destinationCards).find(
                 function (card) {
 
+                    const heading =
+                        card.querySelector("h3");
+
+                    if (!heading) {
+                        return false;
+                    }
+
                     const name =
-                        card.querySelector("h3")
-                            .textContent
-                            .trim();
+                        heading.textContent.trim();
 
                     return name === destination;
 
@@ -233,18 +217,28 @@ function displayFavourites() {
         }
 
 
+        const imageElement =
+            originalCard.querySelector("img");
+
+        const descriptionElement =
+            originalCard.querySelector("p");
+
+        const priceElement =
+            originalCard.querySelector("strong");
+
+
         const image =
-            originalCard.querySelector("img").src;
+            imageElement ? imageElement.src : "";
 
         const description =
-            originalCard.querySelector("p")
-                .textContent
-                .trim();
+            descriptionElement
+                ? descriptionElement.textContent.trim()
+                : "";
 
         const price =
-            originalCard.querySelector("strong")
-                .textContent
-                .trim();
+            priceElement
+                ? priceElement.textContent.trim()
+                : "";
 
 
         const favouriteCard =
@@ -255,47 +249,38 @@ function displayFavourites() {
 
 
         favouriteCard.innerHTML = `
-
             <img
                 src="${image}"
-                alt="${destination} travel destination">
+                alt="${destination} travel destination"
+            >
 
             <div class="favourite-card-content">
 
-                <h3>
-                    ${destination}
-                </h3>
+                <h3>${destination}</h3>
 
-                <p>
-                    ${description}
-                </p>
+                <p>${description}</p>
 
-                <strong>
-                    ${price}
-                </strong>
+                <strong>${price}</strong>
 
                 <div class="favourite-card-buttons">
 
                     <button
                         class="details-btn"
-                        onclick="showDestinationDetails('${destination}')">
-
+                        onclick="showDestinationDetails('${destination}')"
+                    >
                         View Details
-
                     </button>
 
                     <button
                         class="book-btn"
-                        onclick="bookDestination('${destination}')">
-
+                        onclick="bookDestination('${destination}')"
+                    >
                         Book Now
-
                     </button>
 
                 </div>
 
             </div>
-
         `;
 
 
@@ -308,7 +293,6 @@ function displayFavourites() {
 }
 
 
-
 // ========================================
 // FAVOURITE BUTTONS
 // ========================================
@@ -318,21 +302,24 @@ favoriteButtons.forEach(function (button) {
     const card =
         button.closest(".destination-card");
 
-
     if (!card) {
         return;
     }
 
 
+    const heading =
+        card.querySelector("h3");
+
+    if (!heading) {
+        return;
+    }
+
+
     const destination =
-        card.querySelector("h3")
-            .textContent
-            .trim();
+        heading.textContent.trim();
 
 
-    if (
-        savedFavourites.includes(destination)
-    ) {
+    if (savedFavourites.includes(destination)) {
 
         button.classList.add("active");
 
@@ -353,9 +340,7 @@ favoriteButtons.forEach(function (button) {
             button.classList.toggle("active");
 
 
-            if (
-                button.classList.contains("active")
-            ) {
+            if (button.classList.contains("active")) {
 
                 button.innerHTML = "♥";
 
@@ -365,15 +350,9 @@ favoriteButtons.forEach(function (button) {
                 );
 
 
-                if (
-                    !savedFavourites.includes(
-                        destination
-                    )
-                ) {
+                if (!savedFavourites.includes(destination)) {
 
-                    savedFavourites.push(
-                        destination
-                    );
+                    savedFavourites.push(destination);
 
                 }
 
@@ -390,10 +369,7 @@ favoriteButtons.forEach(function (button) {
                 savedFavourites =
                     savedFavourites.filter(
                         function (item) {
-
-                            return item !==
-                                destination;
-
+                            return item !== destination;
                         }
                     );
 
@@ -402,9 +378,7 @@ favoriteButtons.forEach(function (button) {
 
             localStorage.setItem(
                 "travelMateFavourites",
-                JSON.stringify(
-                    savedFavourites
-                )
+                JSON.stringify(savedFavourites)
             );
 
 
@@ -417,7 +391,6 @@ favoriteButtons.forEach(function (button) {
 
 
 displayFavourites();
-
 
 
 // ========================================
@@ -437,18 +410,19 @@ if (contactForm) {
             event.preventDefault();
 
 
+            const nameElement =
+                document.getElementById("name");
+
+
             const name =
-                document
-                    .getElementById("name")
-                    .value
-                    .trim();
+                nameElement
+                    ? nameElement.value.trim()
+                    : "";
 
 
             if (name === "") {
 
-                alert(
-                    "Please enter your name."
-                );
+                alert("Please enter your name.");
 
                 return;
 
@@ -470,7 +444,6 @@ if (contactForm) {
 }
 
 
-
 // ========================================
 // BOOKING MODAL
 // ========================================
@@ -488,9 +461,8 @@ const bookingDestination =
     document.getElementById("bookingDestination");
 
 
-
 // ========================================
-// SET MINIMUM TRAVEL DATE
+// TRAVEL DATE
 // ========================================
 
 const travelDate =
@@ -499,36 +471,24 @@ const travelDate =
 
 if (travelDate) {
 
-    const today =
-        new Date();
+    const today = new Date();
 
     const year =
         today.getFullYear();
 
     const month =
-        String(
-            today.getMonth() + 1
-        ).padStart(2, "0");
+        String(today.getMonth() + 1).padStart(2, "0");
 
     const day =
-        String(
-            today.getDate()
-        ).padStart(2, "0");
-
+        String(today.getDate()).padStart(2, "0");
 
     const formattedDate =
-        year +
-        "-" +
-        month +
-        "-" +
-        day;
-
+        year + "-" + month + "-" + day;
 
     travelDate.min =
         formattedDate;
 
 }
-
 
 
 // ========================================
@@ -537,38 +497,33 @@ if (travelDate) {
 
 function bookDestination(destination) {
 
-    if (
-        bookingModal &&
-        bookingDestination
-    ) {
-
-        bookingDestination.value =
-            destination;
+    if (!bookingModal || !bookingDestination) {
+        console.error("Booking modal elements not found.");
+        return;
+    }
 
 
-        bookingModal.classList.add(
-            "active"
-        );
+    bookingDestination.value =
+        destination;
 
 
-        // Reset previous confirmation
-
-        const existingConfirmation =
-            document.querySelector(
-                ".booking-success"
-            );
+    bookingModal.classList.add("active");
 
 
-        if (existingConfirmation) {
+    const existingConfirmation =
+        document.querySelector(".booking-success");
 
-            existingConfirmation.remove();
 
-        }
+    if (existingConfirmation) {
+        existingConfirmation.remove();
+    }
 
+
+    if (bookingForm) {
+        bookingForm.style.display = "";
     }
 
 }
-
 
 
 // ========================================
@@ -581,31 +536,7 @@ if (closeBooking) {
         "click",
         function () {
 
-            bookingModal.classList.remove(
-                "active"
-            );
-
-        }
-    );
-
-}
-
-
-
-// ========================================
-// CLOSE BOOKING WHEN CLICKING OUTSIDE
-// ========================================
-
-if (bookingModal) {
-
-    bookingModal.addEventListener(
-        "click",
-        function (event) {
-
-            if (
-                event.target ===
-                bookingModal
-            ) {
+            if (bookingModal) {
 
                 bookingModal.classList.remove(
                     "active"
@@ -619,68 +550,96 @@ if (bookingModal) {
 }
 
 
+// ========================================
+// CLOSE BOOKING OUTSIDE
+// ========================================
+
+if (bookingModal) {
+
+    bookingModal.addEventListener(
+        "click",
+        function (event) {
+
+            if (event.target === bookingModal) {
+
+                bookingModal.classList.remove(
+                    "active"
+                );
+
+            }
+
+        }
+    );
+
+}
+
 
 // ========================================
-// CONFIRM BOOKING
+// CONFIRM BOOKING + SEND TO FLASK
 // ========================================
 
 if (bookingForm) {
 
     bookingForm.addEventListener(
         "submit",
-        function (event) {
+        async function (event) {
 
             event.preventDefault();
 
 
+            // ========================================
+            // GET FORM VALUES
+            // ========================================
+
+            const bookingNameElement =
+                document.getElementById("bookingName");
+
+            const bookingEmailElement =
+                document.getElementById("bookingEmail");
+
+            const bookingDestinationElement =
+                document.getElementById("bookingDestination");
+
+            const travelDateElement =
+                document.getElementById("travelDate");
+
+            const numberOfPeopleElement =
+                document.getElementById("numberOfPeople");
+
+
             const name =
-                document
-                    .getElementById(
-                        "bookingName"
-                    )
-                    .value
-                    .trim();
+                bookingNameElement
+                    ? bookingNameElement.value.trim()
+                    : "";
 
 
             const email =
-                document
-                    .getElementById(
-                        "bookingEmail"
-                    )
-                    .value
-                    .trim();
+                bookingEmailElement
+                    ? bookingEmailElement.value.trim()
+                    : "";
 
 
             const destination =
-                document
-                    .getElementById(
-                        "bookingDestination"
-                    )
-                    .value;
+                bookingDestinationElement
+                    ? bookingDestinationElement.value
+                    : "";
 
 
             const travelDateValue =
-                document
-                    .getElementById(
-                        "travelDate"
-                    )
-                    .value;
+                travelDateElement
+                    ? travelDateElement.value
+                    : "";
 
 
             const people =
-                Number(
-                    document
-                        .getElementById(
-                            "numberOfPeople"
-                        )
-                        .value
-                );
+                numberOfPeopleElement
+                    ? Number(numberOfPeopleElement.value)
+                    : 0;
 
 
-
-            // =================================
+            // ========================================
             // VALIDATION
-            // =================================
+            // ========================================
 
             if (name.length < 2) {
 
@@ -697,6 +656,17 @@ if (bookingForm) {
 
                 alert(
                     "Please enter your email address."
+                );
+
+                return;
+
+            }
+
+
+            if (destination === "") {
+
+                alert(
+                    "Please select a destination."
                 );
 
                 return;
@@ -726,14 +696,13 @@ if (bookingForm) {
             }
 
 
-
-            // =================================
-            // CHECK PAST DATE
-            // =================================
+            // ========================================
+            // CHECK DATE
+            // ========================================
 
             if (
-                travelDateValue <
-                travelDate.min
+                travelDate &&
+                travelDateValue < travelDate.min
             ) {
 
                 alert(
@@ -745,127 +714,226 @@ if (bookingForm) {
             }
 
 
+            // ========================================
+            // SEND BOOKING TO FLASK
+            // ========================================
 
-            // =================================
-            // CREATE CONFIRMATION
-            // =================================
+            try {
 
-            const bookingBox =
-                document.querySelector(
-                    ".booking-box"
+                console.log(
+                    "Sending booking to Flask..."
                 );
 
 
-            const oldConfirmation =
-                document.querySelector(
-                    ".booking-success"
+                const response =
+                    await fetch(
+                        "http://127.0.0.1:5000/api/bookings",
+                        {
+                            method: "POST",
+
+                            headers: {
+                                "Content-Type":
+                                    "application/json"
+                            },
+
+                            body: JSON.stringify({
+
+                                name: name,
+
+                                email: email,
+
+                                destination: destination,
+
+                                travelDate: travelDateValue,
+
+                                people: people
+
+                            })
+
+                        }
+                    );
+
+
+                const result =
+                    await response.json();
+
+
+                console.log(
+                    "Backend response:",
+                    result
                 );
 
 
-            if (oldConfirmation) {
+                // ========================================
+                // BACKEND ERROR
+                // ========================================
 
-                oldConfirmation.remove();
+                if (!response.ok) {
 
-            }
+                    alert(
+                        result.message ||
+                        "Booking failed. Please try again."
+                    );
+
+                    return;
+
+                }
 
 
-            const confirmation =
-                document.createElement(
-                    "div"
+                // ========================================
+                // SUCCESS
+                // ========================================
+
+                const bookingBox =
+                    document.querySelector(".booking-box");
+
+
+                if (!bookingBox) {
+
+                    alert(
+                        "Booking successful!"
+                    );
+
+                    return;
+
+                }
+
+
+                const oldConfirmation =
+                    document.querySelector(
+                        ".booking-success"
+                    );
+
+
+                if (oldConfirmation) {
+                    oldConfirmation.remove();
+                }
+
+
+                const confirmation =
+                    document.createElement("div");
+
+
+                confirmation.className =
+                    "booking-success";
+
+
+                confirmation.innerHTML = `
+                    <div class="success-icon">
+                        ✓
+                    </div>
+
+                    <h3>
+                        Booking Confirmed!
+                    </h3>
+
+                    <p>
+                        Thank you,
+                        <strong>${name}</strong>.
+                    </p>
+
+                    <div class="booking-summary">
+
+                        <p>
+                            <strong>Destination:</strong>
+                            ${destination}
+                        </p>
+
+                        <p>
+                            <strong>Travel Date:</strong>
+                            ${travelDateValue}
+                        </p>
+
+                        <p>
+                            <strong>Number of People:</strong>
+                            ${people}
+                        </p>
+
+                        <p>
+                            <strong>Email:</strong>
+                            ${email}
+                        </p>
+
+                    </div>
+
+                    <p>
+                        Your booking has been
+                        saved successfully.
+                    </p>
+
+                    <button
+                        class="btn primary-btn"
+                        id="closeSuccess"
+                        type="button"
+                    >
+                        Done
+                    </button>
+                `;
+
+
+                bookingBox.appendChild(
+                    confirmation
                 );
 
 
-            confirmation.className =
-                "booking-success";
+                // ========================================
+                // HIDE FORM
+                // ========================================
+
+                bookingForm.style.display =
+                    "none";
 
 
-            confirmation.innerHTML = `
+                // ========================================
+                // DONE BUTTON
+                // ========================================
 
-                <div class="success-icon">
-                    ✓
-                </div>
-
-                <h3>
-                    Booking Confirmed!
-                </h3>
-
-                <p>
-                    Thank you, <strong>${name}</strong>.
-                </p>
-
-                <div class="booking-summary">
-
-                    <p>
-                        <strong>Destination:</strong>
-                        ${destination}
-                    </p>
-
-                    <p>
-                        <strong>Travel Date:</strong>
-                        ${travelDateValue}
-                    </p>
-
-                    <p>
-                        <strong>Number of People:</strong>
-                        ${people}
-                    </p>
-
-                    <p>
-                        <strong>Email:</strong>
-                        ${email}
-                    </p>
-
-                </div>
-
-                <button
-                    class="btn primary-btn"
-                    id="closeSuccess">
-
-                    Done
-
-                </button>
-
-            `;
+                const closeSuccess =
+                    document.getElementById(
+                        "closeSuccess"
+                    );
 
 
-            bookingBox.appendChild(
-                confirmation
-            );
+                if (closeSuccess) {
+
+                    closeSuccess.addEventListener(
+                        "click",
+                        function () {
+
+                            if (bookingModal) {
+
+                                bookingModal.classList.remove(
+                                    "active"
+                                );
+
+                            }
 
 
-            // Hide booking form
-
-            bookingForm.style.display =
-                "none";
+                            bookingForm.reset();
 
 
-            // Done button
+                            bookingForm.style.display =
+                                "";
 
-            const closeSuccess =
-                document.getElementById(
-                    "closeSuccess"
+
+                            confirmation.remove();
+
+                        }
+                    );
+
+                }
+
+
+            } catch (error) {
+
+                console.error(
+                    "Booking error:",
+                    error
                 );
 
 
-            if (closeSuccess) {
-
-                closeSuccess.addEventListener(
-                    "click",
-                    function () {
-
-                        bookingModal.classList.remove(
-                            "active"
-                        );
-
-
-                        bookingForm.reset();
-
-                        bookingForm.style.display =
-                            "";
-
-                        confirmation.remove();
-
-                    }
+                alert(
+                    "Unable to connect to the TravelMate server. Please make sure Flask is running."
                 );
 
             }
@@ -876,51 +944,33 @@ if (bookingForm) {
 }
 
 
-
 // ========================================
 // DESTINATION DETAILS MODAL
 // ========================================
 
 const detailsModal =
-    document.getElementById(
-        "detailsModal"
-    );
+    document.getElementById("detailsModal");
 
 const closeDetails =
-    document.getElementById(
-        "closeDetails"
-    );
+    document.getElementById("closeDetails");
 
 const detailsTitle =
-    document.getElementById(
-        "detailsTitle"
-    );
+    document.getElementById("detailsTitle");
 
 const detailsCountry =
-    document.getElementById(
-        "detailsCountry"
-    );
+    document.getElementById("detailsCountry");
 
 const detailsDescription =
-    document.getElementById(
-        "detailsDescription"
-    );
+    document.getElementById("detailsDescription");
 
 const detailsPrice =
-    document.getElementById(
-        "detailsPrice"
-    );
+    document.getElementById("detailsPrice");
 
 const detailsImage =
-    document.getElementById(
-        "detailsImage"
-    );
+    document.getElementById("detailsImage");
 
 const detailsBookButton =
-    document.getElementById(
-        "detailsBookButton"
-    );
-
+    document.getElementById("detailsBookButton");
 
 
 // ========================================
@@ -943,7 +993,6 @@ const destinationDetails = {
 
     },
 
-
     Goa: {
 
         country: "India",
@@ -957,7 +1006,6 @@ const destinationDetails = {
             "images/goa.jpg"
 
     },
-
 
     Manali: {
 
@@ -973,7 +1021,6 @@ const destinationDetails = {
 
     },
 
-
     Kerala: {
 
         country: "India",
@@ -988,7 +1035,6 @@ const destinationDetails = {
 
     },
 
-
     Rajasthan: {
 
         country: "India",
@@ -1002,7 +1048,6 @@ const destinationDetails = {
             "images/rajasthan.jpg"
 
     },
-
 
     Andaman: {
 
@@ -1021,7 +1066,6 @@ const destinationDetails = {
 };
 
 
-
 // ========================================
 // OPEN DESTINATION DETAILS
 // ========================================
@@ -1029,41 +1073,44 @@ const destinationDetails = {
 function showDestinationDetails(destination) {
 
     const details =
-        destinationDetails[
-            destination
-        ];
+        destinationDetails[destination];
 
 
-    if (
-        !details ||
-        !detailsModal
-    ) {
-
+    if (!details || !detailsModal) {
         return;
-
     }
 
 
-    detailsTitle.textContent =
-        destination;
+    if (detailsTitle) {
+        detailsTitle.textContent =
+            destination;
+    }
 
 
-    detailsCountry.textContent =
-        details.country;
+    if (detailsCountry) {
+        detailsCountry.textContent =
+            details.country;
+    }
 
 
-    detailsDescription.textContent =
-        details.description;
+    if (detailsDescription) {
+        detailsDescription.textContent =
+            details.description;
+    }
 
 
-    detailsPrice.textContent =
-        details.price;
+    if (detailsPrice) {
+        detailsPrice.textContent =
+            details.price;
+    }
 
 
-    detailsImage.style.backgroundImage =
-        "url('" +
-        details.image +
-        "')";
+    if (detailsImage) {
+
+        detailsImage.style.backgroundImage =
+            "url('" + details.image + "')";
+
+    }
 
 
     if (detailsBookButton) {
@@ -1091,7 +1138,6 @@ function showDestinationDetails(destination) {
 }
 
 
-
 // ========================================
 // CLOSE DETAILS
 // ========================================
@@ -1102,15 +1148,18 @@ if (closeDetails) {
         "click",
         function () {
 
-            detailsModal.classList.remove(
-                "active"
-            );
+            if (detailsModal) {
+
+                detailsModal.classList.remove(
+                    "active"
+                );
+
+            }
 
         }
     );
 
 }
-
 
 
 // ========================================
@@ -1123,10 +1172,7 @@ if (detailsModal) {
         "click",
         function (event) {
 
-            if (
-                event.target ===
-                detailsModal
-            ) {
+            if (event.target === detailsModal) {
 
                 detailsModal.classList.remove(
                     "active"
@@ -1138,6 +1184,8 @@ if (detailsModal) {
     );
 
 }
+
+
 // ========================================
 // STEP 27B - TRAVEL BUDGET CALCULATOR
 // ========================================
@@ -1160,9 +1208,6 @@ const calculateBudget =
 const budgetResult =
     document.getElementById("budgetResult");
 
-const totalBudget =
-    document.getElementById("totalBudget");
-
 
 // ========================================
 // CALCULATE TRAVEL BUDGET
@@ -1173,8 +1218,6 @@ if (calculateBudget) {
     calculateBudget.addEventListener(
         "click",
         function () {
-
-            // Get values
 
             const destinationPrice =
                 Number(budgetDestination.value);
@@ -1204,10 +1247,7 @@ if (calculateBudget) {
             }
 
 
-            if (
-                people < 1 ||
-                people > 20
-            ) {
+            if (people < 1 || people > 20) {
 
                 alert(
                     "Number of people must be between 1 and 20."
@@ -1218,10 +1258,7 @@ if (calculateBudget) {
             }
 
 
-            if (
-                nights < 1 ||
-                nights > 30
-            ) {
+            if (nights < 1 || nights > 30) {
 
                 alert(
                     "Number of nights must be between 1 and 30."
@@ -1239,56 +1276,51 @@ if (calculateBudget) {
             const destinationCost =
                 destinationPrice * people;
 
-
             const hotelCost =
-                hotelPrice *
-                nights *
-                people;
-
+                hotelPrice * nights * people;
 
             const total =
-                destinationCost +
-                hotelCost;
+                destinationCost + hotelCost;
 
 
             // ========================================
             // DISPLAY RESULT
             // ========================================
 
-            totalBudget.textContent =
-                "₹" + total.toLocaleString("en-IN");
+            if (budgetResult) {
 
+                budgetResult.innerHTML = `
+                    <h3>
+                        Estimated Trip Cost
+                    </h3>
 
-            budgetResult.innerHTML = `
+                    <p>
+                        Destination package:
+                        ₹${destinationCost.toLocaleString("en-IN")}
+                    </p>
 
-                <h3>
-                    Estimated Trip Cost
-                </h3>
+                    <p>
+                        Hotel cost:
+                        ₹${hotelCost.toLocaleString("en-IN")}
+                    </p>
 
-                <p>
-                    Destination package:
-                    ₹${destinationCost.toLocaleString("en-IN")}
-                </p>
+                    <strong>
+                        ₹${total.toLocaleString("en-IN")}
+                    </strong>
 
-                <p>
-                    Hotel cost:
-                    ₹${hotelCost.toLocaleString("en-IN")}
-                </p>
+                    <p class="budget-success">
+                        ✈️ Have a wonderful journey!
+                    </p>
+                `;
 
-                <strong id="totalBudget">
-                    ₹${total.toLocaleString("en-IN")}
-                </strong>
-
-                <p class="budget-success">
-                    ✈️ Have a wonderful journey!
-                </p>
-
-            `;
+            }
 
         }
     );
 
 }
+
+
 // ========================================
 // STEP 28B - TRIP PLANNER
 // ========================================
@@ -1335,8 +1367,6 @@ if (createTripPlan) {
                 Number(tripDays.value);
 
 
-            // Get selected activities
-
             const selectedActivities =
                 document.querySelectorAll(
                     'input[name="activities"]:checked'
@@ -1344,6 +1374,7 @@ if (createTripPlan) {
 
 
             const activities = [];
+
 
             selectedActivities.forEach(
                 function (activity) {
@@ -1410,6 +1441,7 @@ if (createTripPlan) {
 
             let activityText;
 
+
             if (activities.length === 0) {
 
                 activityText =
@@ -1430,6 +1462,7 @@ if (createTripPlan) {
             const selectedDate =
                 new Date(date);
 
+
             const formattedDate =
                 selectedDate.toLocaleDateString(
                     "en-IN",
@@ -1445,62 +1478,69 @@ if (createTripPlan) {
             // CREATE RESULT
             // ========================================
 
-            tripPlanResult.innerHTML = `
+            if (tripPlanResult) {
 
-                <h3>
-                    🎉 Your Trip Plan is Ready!
-                </h3>
+                tripPlanResult.innerHTML = `
+                    <h3>
+                        🎉 Your Trip Plan is Ready!
+                    </h3>
 
-                <div class="trip-plan-details">
+                    <div class="trip-plan-details">
 
-                    <p>
-                        📍 <strong>Destination:</strong>
-                        ${destination}
-                    </p>
+                        <p>
+                            📍
+                            <strong>Destination:</strong>
+                            ${destination}
+                        </p>
 
-                    <p>
-                        📅 <strong>Travel Date:</strong>
-                        ${formattedDate}
-                    </p>
+                        <p>
+                            📅
+                            <strong>Travel Date:</strong>
+                            ${formattedDate}
+                        </p>
 
-                    <p>
-                        👥 <strong>Travellers:</strong>
-                        ${people}
-                    </p>
+                        <p>
+                            👥
+                            <strong>Travellers:</strong>
+                            ${people}
+                        </p>
 
-                    <p>
-                        🗓️ <strong>Duration:</strong>
-                        ${days} day(s)
-                    </p>
+                        <p>
+                            🗓️
+                            <strong>Duration:</strong>
+                            ${days} day(s)
+                        </p>
 
-                    <p>
-                        🎯 <strong>Activities:</strong>
-                        ${activityText}
-                    </p>
+                        <p>
+                            🎯
+                            <strong>Activities:</strong>
+                            ${activityText}
+                        </p>
 
-                </div>
+                    </div>
 
-                <div class="trip-message">
+                    <div class="trip-message">
 
-                    ✈️ Have a wonderful trip to
-                    <strong>${destination}</strong>!
+                        ✈️ Have a wonderful trip to
+                        <strong>${destination}</strong>!
 
-                </div>
+                    </div>
+                `;
 
-            `;
 
+                tripPlanResult.scrollIntoView({
+                    behavior: "smooth",
+                    block: "center"
+                });
 
-            // Scroll to result
-
-            tripPlanResult.scrollIntoView({
-                behavior: "smooth",
-                block: "center"
-            });
+            }
 
         }
     );
 
 }
+
+
 // ========================================
 // STEP 29B - DESTINATION WEATHER
 // ========================================
@@ -1517,135 +1557,138 @@ const weatherResult =
 
 if (checkWeather) {
 
-    checkWeather.addEventListener("click", function () {
+    checkWeather.addEventListener(
+        "click",
+        function () {
 
-        const destination =
-            weatherDestination.value;
-
-
-        // ========================================
-        // VALIDATION
-        // ========================================
-
-        if (destination === "") {
-
-            alert("Please select a destination.");
-
-            return;
-
-        }
+            const destination =
+                weatherDestination.value;
 
 
-        // ========================================
-        // WEATHER DATA
-        // ========================================
+            // ========================================
+            // VALIDATION
+            // ========================================
 
-        const weatherData = {
+            if (destination === "") {
 
-            Hyderabad: {
-                icon: "☀️",
-                temperature: "32°C",
-                condition: "Sunny",
-                description:
-                    "Warm and sunny weather. Perfect for exploring the city."
-            },
+                alert(
+                    "Please select a destination."
+                );
 
-            Goa: {
-                icon: "🌊",
-                temperature: "30°C",
-                condition: "Partly Cloudy",
-                description:
-                    "Warm coastal weather. Great for beaches and outdoor activities."
-            },
+                return;
 
-            Manali: {
-                icon: "🏔️",
-                temperature: "18°C",
-                condition: "Cool & Pleasant",
-                description:
-                    "Cool mountain weather. Perfect for sightseeing and nature trips."
-            },
-
-            Kerala: {
-                icon: "🌧️",
-                temperature: "28°C",
-                condition: "Cloudy",
-                description:
-                    "Pleasant tropical weather with a chance of rain."
-            },
-
-            Rajasthan: {
-                icon: "☀️",
-                temperature: "35°C",
-                condition: "Hot & Sunny",
-                description:
-                    "Hot and sunny weather. Stay hydrated while exploring forts and palaces."
-            },
-
-            Andaman: {
-                icon: "🌴",
-                temperature: "29°C",
-                condition: "Tropical",
-                description:
-                    "Warm tropical weather. Ideal for beaches and water activities."
             }
 
-        };
+
+            // ========================================
+            // WEATHER DATA
+            // ========================================
+
+            const weatherData = {
+
+                Hyderabad: {
+                    icon: "☀️",
+                    temperature: "32°C",
+                    condition: "Sunny",
+                    description:
+                        "Warm and sunny weather. Perfect for exploring the city."
+                },
+
+                Goa: {
+                    icon: "🌊",
+                    temperature: "30°C",
+                    condition: "Partly Cloudy",
+                    description:
+                        "Warm coastal weather. Great for beaches and outdoor activities."
+                },
+
+                Manali: {
+                    icon: "🏔️",
+                    temperature: "18°C",
+                    condition: "Cool & Pleasant",
+                    description:
+                        "Cool mountain weather. Perfect for sightseeing and nature trips."
+                },
+
+                Kerala: {
+                    icon: "🌧️",
+                    temperature: "28°C",
+                    condition: "Cloudy",
+                    description:
+                        "Pleasant tropical weather with a chance of rain."
+                },
+
+                Rajasthan: {
+                    icon: "☀️",
+                    temperature: "35°C",
+                    condition: "Hot & Sunny",
+                    description:
+                        "Hot and sunny weather. Stay hydrated while exploring forts and palaces."
+                },
+
+                Andaman: {
+                    icon: "🌴",
+                    temperature: "29°C",
+                    condition: "Tropical",
+                    description:
+                        "Warm tropical weather. Ideal for beaches and water activities."
+                }
+
+            };
 
 
-        const weather =
-            weatherData[destination];
+            const weather =
+                weatherData[destination];
 
 
-        // ========================================
-        // DISPLAY WEATHER
-        // ========================================
+            if (!weather) {
 
-        weatherResult.innerHTML = `
+                alert(
+                    "Weather information is not available."
+                );
 
-            <div class="weather-icon">
+                return;
 
-                ${weather.icon}
-
-            </div>
-
-            <h3>
-
-                ${destination}
-
-            </h3>
-
-            <h2>
-
-                ${weather.temperature}
-
-            </h2>
-
-            <p class="weather-condition">
-
-                ${weather.condition}
-
-            </p>
-
-            <p>
-
-                ${weather.description}
-
-            </p>
-
-        `;
+            }
 
 
-        // Scroll to result
+            // ========================================
+            // DISPLAY WEATHER
+            // ========================================
 
-        weatherResult.scrollIntoView({
+            if (weatherResult) {
 
-            behavior: "smooth",
+                weatherResult.innerHTML = `
+                    <div class="weather-icon">
+                        ${weather.icon}
+                    </div>
 
-            block: "center"
+                    <h3>
+                        ${destination}
+                    </h3>
 
-        });
+                    <h2>
+                        ${weather.temperature}
+                    </h2>
 
-    });
+                    <p class="weather-condition">
+                        ${weather.condition}
+                    </p>
+
+                    <p>
+                        ${weather.description}
+                    </p>
+                `;
+
+
+                weatherResult.scrollIntoView({
+                    behavior: "smooth",
+                    block: "center"
+                });
+
+            }
+
+        }
+    );
 
 }

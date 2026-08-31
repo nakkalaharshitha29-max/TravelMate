@@ -1,0 +1,23 @@
+[
+    {
+        "name": "Harshitha",
+        "email": "harshitha@example.com",
+        "destination": "Goa",
+        "travelDate": "2026-09-15",
+        "people": 2
+    },
+    {
+        "name": "Harshitha",
+        "email": "harshitha@example.com",
+        "destination": "Goa",
+        "travelDate": "2026-09-15",
+        "people": 2
+    },
+    {
+        "name": "Harshitha",
+        "email": "harshitha@gmail.com",
+        "destination": "Kerala",
+        "travelDate": "2026-09-03",
+        "people": 1
+    }
+]

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>TravelMate API Test</title>
+</head>
+
+<body>
+
+    <h1>TravelMate POST API Test</h1>
+
+    <button onclick="testBooking()">
+        Test Booking API
+    </button>
+
+    <pre id="result"></pre>
+
+
+    <script>
+
+        async function testBooking() {
+
+            const bookingData = {
+
+                name: "Harshitha",
+
+                email: "harshitha@example.com",
+
+                destination: "Goa",
+
+                travelDate: "2026-09-15",
+
+                people: 2
+
+            };
+
+
+            try {
+
+                const response = await fetch(
+                    "http://127.0.0.1:5000/api/bookings",
+                    {
+                        method: "POST",
+
+                        headers: {
+                            "Content-Type": "application/json"
+                        },
+
+                        body: JSON.stringify(bookingData)
+                    }
+                );
+
+
+                const result = await response.json();
+
+
+                document.getElementById("result").textContent =
+                    JSON.stringify(result, null, 4);
+
+
+            } catch (error) {
+
+                document.getElementById("result").textContent =
+                    "Error: " + error.message;
+
+            }
+
+        }
+
+    </script>
+
+</body>
+
+</html>
