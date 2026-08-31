@@ -1,16 +1,16 @@
-from flask import Flask, jsonify, request
+from flask import Flask, request, jsonify
 from flask_cors import CORS
-import json
-import os
 
 app = Flask(__name__)
 
+# Allow frontend to communicate with Flask
 CORS(app)
 
-BOOKING_FILE = "data/bookings.json"
 
+# ========================================
+# HOME / TEST API
+# ========================================
 
-# HOME
 @app.route("/", methods=["GET"])
 def home():
     return jsonify({
@@ -19,113 +19,108 @@ def home():
     })
 
 
-# GET DESTINATIONS
-@app.route("/api/destinations", methods=["GET"])
-def get_destinations():
+# ========================================
+# BOOKING API
+# ========================================
 
-    destinations = [
-        {"id": 1, "name": "Hyderabad", "price": 5999},
-        {"id": 2, "name": "Goa", "price": 7499},
-        {"id": 3, "name": "Manali", "price": 8999},
-        {"id": 4, "name": "Kerala", "price": 6999},
-        {"id": 5, "name": "Rajasthan", "price": 9499},
-        {"id": 6, "name": "Andaman", "price": 12999}
-    ]
-
-    return jsonify(destinations)
+bookings = []
 
 
-# POST BOOKING
 @app.route("/api/bookings", methods=["POST"])
 def create_booking():
 
-    data = request.get_json()
+    try:
 
-    if not data:
+        data = request.get_json()
+
+        if not data:
+            return jsonify({
+                "message": "No booking data received"
+            }), 400
+
+        name = data.get("name")
+        email = data.get("email")
+        destination = data.get("destination")
+        travel_date = data.get("travelDate")
+        people = data.get("people")
+
+        # Validation
+        if not name:
+            return jsonify({
+                "message": "Name is required"
+            }), 400
+
+        if not email:
+            return jsonify({
+                "message": "Email is required"
+            }), 400
+
+        if not destination:
+            return jsonify({
+                "message": "Destination is required"
+            }), 400
+
+        if not travel_date:
+            return jsonify({
+                "message": "Travel date is required"
+            }), 400
+
+        if not people:
+            return jsonify({
+                "message": "Number of people is required"
+            }), 400
+
+
+        # Create booking
+        booking = {
+            "id": len(bookings) + 1,
+            "name": name,
+            "email": email,
+            "destination": destination,
+            "travelDate": travel_date,
+            "people": people
+        }
+
+
+        bookings.append(booking)
+
+
         return jsonify({
-            "success": False,
-            "message": "No booking data received"
-        }), 400
+            "message": "Booking created successfully",
+            "booking": booking
+        }), 201
 
-    name = data.get("name")
-    email = data.get("email")
-    destination = data.get("destination")
-    travel_date = data.get("travelDate")
-    people = data.get("people")
 
-    # Validation
-    if not name:
+    except Exception as error:
+
+        print("Booking error:", error)
+
         return jsonify({
-            "success": False,
-            "message": "Name is required"
-        }), 400
-
-    if not email:
-        return jsonify({
-            "success": False,
-            "message": "Email is required"
-        }), 400
-
-    if not destination:
-        return jsonify({
-            "success": False,
-            "message": "Destination is required"
-        }), 400
-
-    if not travel_date:
-        return jsonify({
-            "success": False,
-            "message": "Travel date is required"
-        }), 400
-
-    if not people:
-        return jsonify({
-            "success": False,
-            "message": "Number of people is required"
-        }), 400
-
-    booking = {
-        "name": name,
-        "email": email,
-        "destination": destination,
-        "travelDate": travel_date,
-        "people": people
-    }
-
-    # Read existing bookings
-    if os.path.exists(BOOKING_FILE):
-        with open(BOOKING_FILE, "r") as file:
-            bookings = json.load(file)
-    else:
-        bookings = []
-
-    # Add new booking
-    bookings.append(booking)
-
-    # Save bookings
-    with open(BOOKING_FILE, "w") as file:
-        json.dump(bookings, file, indent=4)
-
-    return jsonify({
-        "success": True,
-        "message": "Booking created and saved successfully",
-        "booking": booking
-    }), 201
+            "message": "Server error",
+            "error": str(error)
+        }), 500
 
 
+# ========================================
 # GET ALL BOOKINGS
+# ========================================
+
 @app.route("/api/bookings", methods=["GET"])
 def get_bookings():
 
-    if os.path.exists(BOOKING_FILE):
-        with open(BOOKING_FILE, "r") as file:
-            bookings = json.load(file)
-    else:
-        bookings = []
-
-    return jsonify(bookings)
+    return jsonify({
+        "bookings": bookings
+    })
 
 
+# ========================================
 # RUN SERVER
+# ========================================
+
 if __name__ == "__main__":
-    app.run(debug=True)
+
+    app.run(
+        host="127.0.0.1",
+        port=5000,
+        debug=True
+    )
