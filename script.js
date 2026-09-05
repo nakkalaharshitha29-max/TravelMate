@@ -16,20 +16,16 @@ if (menuBtn && navLinks) {
         navLinks.classList.toggle("active");
     });
 
-    const navigationLinks = navLinks.querySelectorAll("a");
-
-    navigationLinks.forEach(function (link) {
-
+    navLinks.querySelectorAll("a").forEach(function (link) {
         link.addEventListener("click", function () {
             navLinks.classList.remove("active");
         });
-
     });
 }
 
 
 // ========================================
-// DESTINATION SEARCH + CATEGORY FILTER
+// DESTINATION SEARCH
 // ========================================
 
 const destinationSearch =
@@ -53,7 +49,7 @@ function filterDestinations() {
         ? destinationSearch.value.toLowerCase().trim()
         : "";
 
-    let foundDestination = false;
+    let found = false;
 
     destinationCards.forEach(function (card) {
 
@@ -63,38 +59,36 @@ function filterDestinations() {
             return;
         }
 
-        const destinationName =
+        const name =
             heading.textContent.toLowerCase();
 
-        const cardCategory =
+        const category =
             card.getAttribute("data-category");
 
-        const matchesSearch =
-            destinationName.includes(searchText);
+        const searchMatch =
+            name.includes(searchText);
 
-        const matchesCategory =
+        const categoryMatch =
             selectedCategory === "all" ||
-            cardCategory === selectedCategory;
+            category === selectedCategory;
 
-        if (matchesSearch && matchesCategory) {
+        if (searchMatch && categoryMatch) {
 
             card.style.display = "";
 
-            foundDestination = true;
+            found = true;
 
         } else {
 
             card.style.display = "none";
 
         }
-
     });
 
     if (searchMessage) {
 
         searchMessage.style.display =
-            foundDestination ? "none" : "block";
-
+            found ? "none" : "block";
     }
 }
 
@@ -105,7 +99,6 @@ if (destinationSearch) {
         "input",
         filterDestinations
     );
-
 }
 
 
@@ -117,15 +110,12 @@ filterButtons.forEach(function (button) {
             button.getAttribute("data-filter");
 
         filterButtons.forEach(function (btn) {
-
             btn.classList.remove("active");
-
         });
 
         button.classList.add("active");
 
         filterDestinations();
-
     });
 
 });
@@ -145,9 +135,10 @@ const noFavouritesMessage =
     document.getElementById("noFavouritesMessage");
 
 
-let savedFavourites = JSON.parse(
-    localStorage.getItem("travelMateFavourites")
-) || [];
+let savedFavourites =
+    JSON.parse(
+        localStorage.getItem("travelMateFavourites")
+    ) || [];
 
 
 // ========================================
@@ -160,14 +151,11 @@ function displayFavourites() {
         return;
     }
 
-    const oldCards =
-        favouritesContainer.querySelectorAll(
-            ".favourite-card"
-        );
-
-    oldCards.forEach(function (card) {
-        card.remove();
-    });
+    favouritesContainer
+        .querySelectorAll(".favourite-card")
+        .forEach(function (card) {
+            card.remove();
+        });
 
     if (savedFavourites.length === 0) {
 
@@ -191,15 +179,8 @@ function displayFavourites() {
                     const heading =
                         card.querySelector("h3");
 
-                    if (!heading) {
-                        return false;
-                    }
-
-                    return (
-                        heading.textContent.trim() ===
-                        destination
-                    );
-
+                    return heading &&
+                        heading.textContent.trim() === destination;
                 }
             );
 
@@ -207,82 +188,58 @@ function displayFavourites() {
             return;
         }
 
-        const imageElement =
+        const image =
             originalCard.querySelector("img");
 
-        const descriptionElement =
+        const description =
             originalCard.querySelector("p");
 
-        const priceElement =
+        const price =
             originalCard.querySelector("strong");
 
-        if (
-            !imageElement ||
-            !descriptionElement ||
-            !priceElement
-        ) {
+        if (!image || !description || !price) {
             return;
         }
 
-        const image =
-            imageElement.src;
-
-        const description =
-            descriptionElement.textContent.trim();
-
-        const price =
-            priceElement.textContent.trim();
-
-        const favouriteCard =
+        const card =
             document.createElement("article");
 
-        favouriteCard.className =
-            "favourite-card";
+        card.className = "favourite-card";
 
-        favouriteCard.innerHTML = `
-
+        card.innerHTML = `
             <img
-                src="${image}"
-                alt="${destination} travel destination">
+                src="${image.src}"
+                alt="${destination}">
 
             <div class="favourite-card-content">
 
                 <h3>${destination}</h3>
 
-                <p>${description}</p>
+                <p>${description.textContent}</p>
 
-                <strong>${price}</strong>
+                <strong>${price.textContent}</strong>
 
                 <div class="favourite-card-buttons">
 
                     <button
                         class="details-btn"
                         onclick="showDestinationDetails('${destination}')">
-
                         View Details
-
                     </button>
 
                     <button
                         class="book-btn"
                         onclick="bookDestination('${destination}')">
-
                         Book Now
-
                     </button>
 
                 </div>
 
             </div>
-
         `;
 
-        favouritesContainer.appendChild(
-            favouriteCard
-        );
-
+        favouritesContainer.appendChild(card);
     });
-
 }
 
 
@@ -315,69 +272,40 @@ favoriteButtons.forEach(function (button) {
 
         button.innerHTML = "♥";
 
-        button.setAttribute(
-            "aria-label",
-            "Remove from favourites"
-        );
-
     }
 
-    button.addEventListener(
-        "click",
-        function () {
+    button.addEventListener("click", function () {
 
-            button.classList.toggle("active");
+        button.classList.toggle("active");
 
-            if (
-                button.classList.contains("active")
-            ) {
+        if (button.classList.contains("active")) {
 
-                button.innerHTML = "♥";
+            button.innerHTML = "♥";
 
-                button.setAttribute(
-                    "aria-label",
-                    "Remove from favourites"
-                );
-
-                if (
-                    !savedFavourites.includes(
-                        destination
-                    )
-                ) {
-
-                    savedFavourites.push(
-                        destination
-                    );
-
-                }
-
-            } else {
-
-                button.innerHTML = "♡";
-
-                button.setAttribute(
-                    "aria-label",
-                    "Add to favourites"
-                );
-
-                savedFavourites =
-                    savedFavourites.filter(
-                        function (item) {
-                            return item !== destination;
-                        }
-                    );
-
+            if (!savedFavourites.includes(destination)) {
+                savedFavourites.push(destination);
             }
 
-            localStorage.setItem(
-                "travelMateFavourites",
-                JSON.stringify(savedFavourites)
-            );
+        } else {
 
-            displayFavourites();
+            button.innerHTML = "♡";
 
+            savedFavourites =
+                savedFavourites.filter(
+                    function (item) {
+                        return item !== destination;
+                    }
+                );
         }
-    );
+
+        localStorage.setItem(
+            "travelMateFavourites",
+            JSON.stringify(savedFavourites)
+        );
+
+        displayFavourites();
+
+    });
 
 });
 
@@ -410,9 +338,7 @@ if (contactForm) {
 
             if (name === "") {
 
-                alert(
-                    "Please enter your name."
-                );
+                alert("Please enter your name.");
 
                 return;
             }
@@ -427,7 +353,6 @@ if (contactForm) {
 
         }
     );
-
 }
 
 
@@ -452,7 +377,7 @@ const travelDate =
 
 
 // ========================================
-// SET MINIMUM TRAVEL DATE
+// MINIMUM TRAVEL DATE
 // ========================================
 
 if (travelDate) {
@@ -468,11 +393,8 @@ if (travelDate) {
     const day =
         String(today.getDate()).padStart(2, "0");
 
-    const formattedDate =
-        `${year}-${month}-${day}`;
-
     travelDate.min =
-        formattedDate;
+        `${year}-${month}-${day}`;
 }
 
 
@@ -482,12 +404,24 @@ if (travelDate) {
 
 function bookDestination(destination) {
 
-    if (
-        !bookingModal ||
-        !bookingDestination
-    ) {
-        console.error(
-            "Booking modal elements not found."
+    console.log(
+        "Book Now clicked:",
+        destination
+    );
+
+    if (!bookingModal) {
+
+        alert(
+            "Booking form was not found."
+        );
+
+        return;
+    }
+
+    if (!bookingDestination) {
+
+        alert(
+            "Booking destination field was not found."
         );
 
         return;
@@ -496,30 +430,24 @@ function bookDestination(destination) {
     bookingDestination.value =
         destination;
 
-    bookingModal.classList.add(
-        "active"
-    );
+    bookingModal.classList.add("active");
 
     if (bookingForm) {
 
         bookingForm.style.display = "";
-
     }
 
-    const existingConfirmation =
-        document.querySelector(
-            ".booking-success"
-        );
+    const oldSuccess =
+        document.querySelector(".booking-success");
 
-    if (existingConfirmation) {
-        existingConfirmation.remove();
+    if (oldSuccess) {
+        oldSuccess.remove();
     }
-
 }
 
 
 // ========================================
-// CLOSE BOOKING FORM
+// CLOSE BOOKING
 // ========================================
 
 if (closeBooking) {
@@ -533,17 +461,14 @@ if (closeBooking) {
                 bookingModal.classList.remove(
                     "active"
                 );
-
             }
-
         }
     );
-
 }
 
 
 // ========================================
-// CLOSE BOOKING WHEN CLICKING OUTSIDE
+// CLOSE BOOKING BY CLICKING OUTSIDE
 // ========================================
 
 if (bookingModal) {
@@ -552,20 +477,14 @@ if (bookingModal) {
         "click",
         function (event) {
 
-            if (
-                event.target ===
-                bookingModal
-            ) {
+            if (event.target === bookingModal) {
 
                 bookingModal.classList.remove(
                     "active"
                 );
-
             }
-
         }
     );
-
 }
 
 
@@ -582,24 +501,18 @@ if (bookingForm) {
             event.preventDefault();
 
             const nameElement =
-                document.getElementById(
-                    "bookingName"
-                );
+                document.getElementById("bookingName");
 
             const emailElement =
-                document.getElementById(
-                    "bookingEmail"
-                );
+                document.getElementById("bookingEmail");
 
             const destinationElement =
                 document.getElementById(
                     "bookingDestination"
                 );
 
-            const travelDateElement =
-                document.getElementById(
-                    "travelDate"
-                );
+            const dateElement =
+                document.getElementById("travelDate");
 
             const peopleElement =
                 document.getElementById(
@@ -619,12 +532,12 @@ if (bookingForm) {
 
             const destination =
                 destinationElement
-                    ? destinationElement.value
+                    ? destinationElement.value.trim()
                     : "";
 
             const travelDateValue =
-                travelDateElement
-                    ? travelDateElement.value
+                dateElement
+                    ? dateElement.value
                     : "";
 
             const people =
@@ -684,27 +597,14 @@ if (bookingForm) {
 
 
             // ========================================
-            // CHECK PAST DATE
-            // ========================================
-
-            if (
-                travelDate &&
-                travelDateValue < travelDate.min
-            ) {
-
-                alert(
-                    "Please select a future travel date."
-                );
-
-                return;
-            }
-
-
-            // ========================================
-            // SEND BOOKING TO FLASK BACKEND
+            // SEND TO FLASK
             // ========================================
 
             try {
+
+                console.log(
+                    "Sending booking to Flask..."
+                );
 
                 const response =
                     await fetch(
@@ -731,29 +631,26 @@ if (bookingForm) {
 
                                 people:
                                     people
-
                             })
                         }
                     );
 
 
-                // ========================================
-                // READ BACKEND RESPONSE
-                // ========================================
+                console.log(
+                    "Server response:",
+                    response.status
+                );
+
 
                 const result =
                     await response.json();
 
 
-                // ========================================
-                // BACKEND ERROR
-                // ========================================
-
                 if (!response.ok) {
 
                     alert(
                         result.message ||
-                        "Booking failed. Please try again."
+                        "Booking failed."
                     );
 
                     return;
@@ -761,7 +658,7 @@ if (bookingForm) {
 
 
                 // ========================================
-                // CREATE SUCCESS MESSAGE
+                // BOOKING SUCCESS
                 // ========================================
 
                 const bookingBox =
@@ -772,27 +669,25 @@ if (bookingForm) {
                 if (!bookingBox) {
 
                     alert(
-                        "Booking successful!"
+                        "Booking confirmed successfully!"
                     );
 
                     return;
                 }
 
 
-                const oldConfirmation =
+                const oldSuccess =
                     document.querySelector(
                         ".booking-success"
                     );
 
-                if (oldConfirmation) {
-                    oldConfirmation.remove();
+                if (oldSuccess) {
+                    oldSuccess.remove();
                 }
 
 
                 const confirmation =
-                    document.createElement(
-                        "div"
-                    );
+                    document.createElement("div");
 
                 confirmation.className =
                     "booking-success";
@@ -845,9 +740,7 @@ if (bookingForm) {
                     <button
                         class="btn primary-btn"
                         id="closeSuccess">
-
                         Done
-
                     </button>
 
                 `;
@@ -858,22 +751,15 @@ if (bookingForm) {
                 );
 
 
-                // ========================================
-                // HIDE BOOKING FORM
-                // ========================================
-
                 bookingForm.style.display =
                     "none";
 
-
-                // ========================================
-                // DONE BUTTON
-                // ========================================
 
                 const closeSuccess =
                     document.getElementById(
                         "closeSuccess"
                     );
+
 
                 if (closeSuccess) {
 
@@ -881,13 +767,9 @@ if (bookingForm) {
                         "click",
                         function () {
 
-                            if (bookingModal) {
-
-                                bookingModal.classList.remove(
-                                    "active"
-                                );
-
-                            }
+                            bookingModal.classList.remove(
+                                "active"
+                            );
 
                             bookingForm.reset();
 
@@ -898,7 +780,6 @@ if (bookingForm) {
 
                         }
                     );
-
                 }
 
 
@@ -910,64 +791,46 @@ if (bookingForm) {
                 );
 
                 alert(
-                    "Unable to connect to the TravelMate server. Please make sure Flask is running."
+                    "Unable to connect to the TravelMate server.\n\nPlease make sure Flask is running."
                 );
-
             }
 
         }
     );
-
 }
 
 
 // ========================================
-// DESTINATION DETAILS MODAL
+// DESTINATION DETAILS
 // ========================================
 
 const detailsModal =
-    document.getElementById(
-        "detailsModal"
-    );
+    document.getElementById("detailsModal");
 
 const closeDetails =
-    document.getElementById(
-        "closeDetails"
-    );
+    document.getElementById("closeDetails");
 
 const detailsTitle =
-    document.getElementById(
-        "detailsTitle"
-    );
+    document.getElementById("detailsTitle");
 
 const detailsCountry =
-    document.getElementById(
-        "detailsCountry"
-    );
+    document.getElementById("detailsCountry");
 
 const detailsDescription =
-    document.getElementById(
-        "detailsDescription"
-    );
+    document.getElementById("detailsDescription");
 
 const detailsPrice =
-    document.getElementById(
-        "detailsPrice"
-    );
+    document.getElementById("detailsPrice");
 
 const detailsImage =
-    document.getElementById(
-        "detailsImage"
-    );
+    document.getElementById("detailsImage");
 
 const detailsBookButton =
-    document.getElementById(
-        "detailsBookButton"
-    );
+    document.getElementById("detailsBookButton");
 
 
 // ========================================
-// DESTINATION INFORMATION
+// DESTINATION DATA
 // ========================================
 
 const destinationDetails = {
@@ -983,8 +846,8 @@ const destinationDetails = {
 
         image:
             "images/hyderabad.jpg"
-
     },
+
 
     Goa: {
 
@@ -997,8 +860,8 @@ const destinationDetails = {
 
         image:
             "images/goa.jpg"
-
     },
+
 
     Manali: {
 
@@ -1011,8 +874,8 @@ const destinationDetails = {
 
         image:
             "images/manali.jpg"
-
     },
+
 
     Kerala: {
 
@@ -1025,8 +888,8 @@ const destinationDetails = {
 
         image:
             "images/kerala.jpg"
-
     },
+
 
     Rajasthan: {
 
@@ -1039,8 +902,8 @@ const destinationDetails = {
 
         image:
             "images/rajasthan.jpg"
-
     },
+
 
     Andaman: {
 
@@ -1053,14 +916,13 @@ const destinationDetails = {
 
         image:
             "images/andaman.jpg"
-
     }
 
 };
 
 
 // ========================================
-// OPEN DESTINATION DETAILS
+// SHOW DESTINATION DETAILS
 // ========================================
 
 function showDestinationDetails(destination) {
@@ -1068,48 +930,41 @@ function showDestinationDetails(destination) {
     const details =
         destinationDetails[destination];
 
-    if (
-        !details ||
-        !detailsModal
-    ) {
-
+    if (!details || !detailsModal) {
         return;
     }
 
-    if (detailsTitle) {
 
+    if (detailsTitle) {
         detailsTitle.textContent =
             destination;
-
     }
+
 
     if (detailsCountry) {
-
         detailsCountry.textContent =
             details.country;
-
     }
+
 
     if (detailsDescription) {
-
         detailsDescription.textContent =
             details.description;
-
     }
+
 
     if (detailsPrice) {
-
         detailsPrice.textContent =
             details.price;
-
     }
+
 
     if (detailsImage) {
 
         detailsImage.style.backgroundImage =
             `url('${details.image}')`;
-
     }
+
 
     if (detailsBookButton) {
 
@@ -1123,15 +978,13 @@ function showDestinationDetails(destination) {
                 bookDestination(
                     destination
                 );
-
             };
-
     }
+
 
     detailsModal.classList.add(
         "active"
     );
-
 }
 
 
@@ -1150,18 +1003,11 @@ if (closeDetails) {
                 detailsModal.classList.remove(
                     "active"
                 );
-
             }
-
         }
     );
-
 }
 
-
-// ========================================
-// CLOSE DETAILS OUTSIDE
-// ========================================
 
 if (detailsModal) {
 
@@ -1169,25 +1015,19 @@ if (detailsModal) {
         "click",
         function (event) {
 
-            if (
-                event.target ===
-                detailsModal
-            ) {
+            if (event.target === detailsModal) {
 
                 detailsModal.classList.remove(
                     "active"
                 );
-
             }
-
         }
     );
-
 }
 
 
 // ========================================
-// STEP 27B - TRAVEL BUDGET CALCULATOR
+// TRAVEL BUDGET CALCULATOR
 // ========================================
 
 const budgetDestination =
@@ -1220,10 +1060,6 @@ const budgetResult =
         "budgetResult"
     );
 
-
-// ========================================
-// CALCULATE TRAVEL BUDGET
-// ========================================
 
 if (calculateBudget) {
 
@@ -1262,10 +1098,7 @@ if (calculateBudget) {
             }
 
 
-            if (
-                people < 1 ||
-                people > 20
-            ) {
+            if (people < 1 || people > 20) {
 
                 alert(
                     "Number of people must be between 1 and 20."
@@ -1275,10 +1108,7 @@ if (calculateBudget) {
             }
 
 
-            if (
-                nights < 1 ||
-                nights > 30
-            ) {
+            if (nights < 1 || nights > 30) {
 
                 alert(
                     "Number of nights must be between 1 and 30."
@@ -1320,22 +1150,20 @@ if (calculateBudget) {
                         ₹${total.toLocaleString("en-IN")}
                     </strong>
 
-                    <p class="budget-success">
+                    <p>
                         ✈️ Have a wonderful journey!
                     </p>
 
                 `;
-
             }
 
         }
     );
-
 }
 
 
 // ========================================
-// STEP 28B - TRIP PLANNER
+// TRIP PLANNER
 // ========================================
 
 const createTripPlan =
@@ -1369,10 +1197,6 @@ const tripDays =
     );
 
 
-// ========================================
-// CREATE TRIP PLAN
-// ========================================
-
 if (createTripPlan) {
 
     createTripPlan.addEventListener(
@@ -1404,13 +1228,13 @@ if (createTripPlan) {
 
             const activities = [];
 
+
             selectedActivities.forEach(
                 function (activity) {
 
                     activities.push(
                         activity.value
                     );
-
                 }
             );
 
@@ -1435,10 +1259,7 @@ if (createTripPlan) {
             }
 
 
-            if (
-                people < 1 ||
-                people > 20
-            ) {
+            if (people < 1 || people > 20) {
 
                 alert(
                     "Number of people must be between 1 and 20."
@@ -1448,10 +1269,7 @@ if (createTripPlan) {
             }
 
 
-            if (
-                days < 1 ||
-                days > 30
-            ) {
+            if (days < 1 || days > 30) {
 
                 alert(
                     "Number of days must be between 1 and 30."
@@ -1461,23 +1279,17 @@ if (createTripPlan) {
             }
 
 
-            let activityText;
-
-            if (activities.length === 0) {
-
-                activityText =
-                    "Relax and explore the destination.";
-
-            } else {
-
-                activityText =
-                    activities.join(", ");
-
-            }
+            const activityText =
+                activities.length === 0
+                    ? "Relax and explore the destination."
+                    : activities.join(", ");
 
 
             const selectedDate =
-                new Date(date + "T00:00:00");
+                new Date(
+                    date + "T00:00:00"
+                );
+
 
             const formattedDate =
                 selectedDate.toLocaleDateString(
@@ -1501,27 +1313,32 @@ if (createTripPlan) {
                     <div class="trip-plan-details">
 
                         <p>
-                            📍 <strong>Destination:</strong>
+                            📍
+                            <strong>Destination:</strong>
                             ${destination}
                         </p>
 
                         <p>
-                            📅 <strong>Travel Date:</strong>
+                            📅
+                            <strong>Travel Date:</strong>
                             ${formattedDate}
                         </p>
 
                         <p>
-                            👥 <strong>Travellers:</strong>
+                            👥
+                            <strong>Travellers:</strong>
                             ${people}
                         </p>
 
                         <p>
-                            🗓️ <strong>Duration:</strong>
+                            🗓️
+                            <strong>Duration:</strong>
                             ${days} day(s)
                         </p>
 
                         <p>
-                            🎯 <strong>Activities:</strong>
+                            🎯
+                            <strong>Activities:</strong>
                             ${activityText}
                         </p>
 
@@ -1536,22 +1353,19 @@ if (createTripPlan) {
 
                 `;
 
-
                 tripPlanResult.scrollIntoView({
                     behavior: "smooth",
                     block: "center"
                 });
-
             }
 
         }
     );
-
 }
 
 
 // ========================================
-// STEP 29B - DESTINATION WEATHER
+// DESTINATION WEATHER
 // ========================================
 
 const weatherDestination =
@@ -1602,8 +1416,8 @@ if (checkWeather) {
 
                     description:
                         "Warm and sunny weather. Perfect for exploring the city."
-
                 },
+
 
                 Goa: {
 
@@ -1615,8 +1429,8 @@ if (checkWeather) {
 
                     description:
                         "Warm coastal weather. Great for beaches and outdoor activities."
-
                 },
+
 
                 Manali: {
 
@@ -1628,8 +1442,8 @@ if (checkWeather) {
 
                     description:
                         "Cool mountain weather. Perfect for sightseeing and nature trips."
-
                 },
+
 
                 Kerala: {
 
@@ -1641,8 +1455,8 @@ if (checkWeather) {
 
                     description:
                         "Pleasant tropical weather with a chance of rain."
-
                 },
+
 
                 Rajasthan: {
 
@@ -1654,8 +1468,8 @@ if (checkWeather) {
 
                     description:
                         "Hot and sunny weather. Stay hydrated while exploring forts and palaces."
-
                 },
+
 
                 Andaman: {
 
@@ -1667,7 +1481,6 @@ if (checkWeather) {
 
                     description:
                         "Warm tropical weather. Ideal for beaches and water activities."
-
                 }
 
             };
@@ -1715,16 +1528,21 @@ if (checkWeather) {
 
 
                 weatherResult.scrollIntoView({
-
                     behavior: "smooth",
-
                     block: "center"
-
                 });
 
             }
 
         }
     );
-
 }
+
+
+// ========================================
+// TRAVELMATE SCRIPT LOADED
+// ========================================
+
+console.log(
+    "TravelMate JavaScript loaded successfully."
+);

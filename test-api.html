@@ -3,21 +3,74 @@
 
 <head>
     <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>TravelMate API Test</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 30px;
+        }
+
+        h1 {
+            margin-bottom: 20px;
+        }
+
+        button {
+            padding: 10px 18px;
+            margin: 5px;
+            cursor: pointer;
+        }
+
+        pre {
+            margin-top: 20px;
+            padding: 20px;
+            background: #f4f4f4;
+            border: 1px solid #ddd;
+            white-space: pre-wrap;
+        }
+    </style>
 </head>
 
 <body>
 
-    <h1>TravelMate POST API Test</h1>
+    <h1>TravelMate API Test</h1>
 
+    <!-- CREATE -->
     <button onclick="testBooking()">
-        Test Booking API
+        Test Create Booking
+    </button>
+
+    <!-- READ -->
+    <button onclick="getBookings()">
+        Test Read Bookings
+    </button>
+
+    <!-- READ SINGLE -->
+    <button onclick="getSingleBooking()">
+        Test Read Single Booking
+    </button>
+
+    <!-- UPDATE -->
+    <button onclick="updateBooking()">
+        Test Update Booking
+    </button>
+
+    <!-- DELETE -->
+    <button onclick="deleteBooking()">
+        Test Delete Booking
     </button>
 
     <pre id="result"></pre>
 
 
     <script>
+
+        // ========================================
+        // CREATE BOOKING - POST
+        // ========================================
 
         async function testBooking() {
 
@@ -48,6 +101,153 @@
                         },
 
                         body: JSON.stringify(bookingData)
+                    }
+                );
+
+
+                const result = await response.json();
+
+
+                document.getElementById("result").textContent =
+                    JSON.stringify(result, null, 4);
+
+
+            } catch (error) {
+
+                document.getElementById("result").textContent =
+                    "Error: " + error.message;
+
+            }
+
+        }
+
+
+        // ========================================
+        // READ ALL BOOKINGS - GET
+        // ========================================
+
+        async function getBookings() {
+
+            try {
+
+                const response = await fetch(
+                    "http://127.0.0.1:5000/api/bookings"
+                );
+
+
+                const result = await response.json();
+
+
+                document.getElementById("result").textContent =
+                    JSON.stringify(result, null, 4);
+
+
+            } catch (error) {
+
+                document.getElementById("result").textContent =
+                    "Error: " + error.message;
+
+            }
+
+        }
+
+
+        // ========================================
+        // READ SINGLE BOOKING - GET
+        // ========================================
+
+        async function getSingleBooking() {
+
+            try {
+
+                const response = await fetch(
+                    "http://127.0.0.1:5000/api/bookings/1"
+                );
+
+
+                const result = await response.json();
+
+
+                document.getElementById("result").textContent =
+                    JSON.stringify(result, null, 4);
+
+
+            } catch (error) {
+
+                document.getElementById("result").textContent =
+                    "Error: " + error.message;
+
+            }
+
+        }
+
+
+        // ========================================
+        // UPDATE BOOKING - PUT
+        // ========================================
+
+        async function updateBooking() {
+
+            const updatedBooking = {
+
+                name: "Harshitha Updated",
+
+                email: "harshitha@example.com",
+
+                destination: "Kerala",
+
+                travelDate: "2026-09-20",
+
+                people: 3
+
+            };
+
+
+            try {
+
+                const response = await fetch(
+                    "http://127.0.0.1:5000/api/bookings/1",
+                    {
+                        method: "PUT",
+
+                        headers: {
+                            "Content-Type": "application/json"
+                        },
+
+                        body: JSON.stringify(updatedBooking)
+                    }
+                );
+
+
+                const result = await response.json();
+
+
+                document.getElementById("result").textContent =
+                    JSON.stringify(result, null, 4);
+
+
+            } catch (error) {
+
+                document.getElementById("result").textContent =
+                    "Error: " + error.message;
+
+            }
+
+        }
+
+
+        // ========================================
+        // DELETE BOOKING - DELETE
+        // ========================================
+
+        async function deleteBooking() {
+
+            try {
+
+                const response = await fetch(
+                    "http://127.0.0.1:5000/api/bookings/1",
+                    {
+                        method: "DELETE"
                     }
                 );
 
